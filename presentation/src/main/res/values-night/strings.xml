@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_search">search…</string>
+    <string name="search">search</string>
+    <string name="clear">clear</string>
+</resources>
