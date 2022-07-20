@@ -16,7 +16,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
         super.onCreate(savedInstanceState)
         binding = getViewBinding()
         setContentView(binding.root)
-
+        viewModel
         initViews()
         initListeners()
     }
@@ -25,5 +25,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     open fun initListeners() = Unit
 
+    open fun initObservers() = Unit
 
 }
