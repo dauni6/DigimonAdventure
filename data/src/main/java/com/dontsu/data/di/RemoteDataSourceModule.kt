@@ -24,7 +24,7 @@ object RemoteDataSourceModule {
     @Provides
     @Singleton
     fun provideDigimonSearchRemoteDataSource(digimonApi: DigimonApi): DigimonSearchRemoteDataSource {
-        return DigimonSearchRemoteDataSourceImpl()
+        return DigimonSearchRemoteDataSourceImpl(api = digimonApi)
     }
 
 }

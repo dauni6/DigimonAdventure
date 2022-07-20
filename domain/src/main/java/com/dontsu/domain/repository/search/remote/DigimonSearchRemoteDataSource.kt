@@ -4,5 +4,5 @@ import com.dontsu.domain.model.Digimon
 import kotlinx.coroutines.flow.Flow
 
 interface DigimonSearchRemoteDataSource {
-    fun searchDigimon(id: String): Flow<Digimon>
+    fun searchDigimon(id: Int): Flow<Digimon>
 }

@@ -10,8 +10,8 @@ class DigimonSearchRemoteDataSourceImpl @Inject constructor(
     private val api: DigimonApi
 ): DigimonSearchRemoteDataSource {
 
-    override fun searchDigimon(id: String): Flow<Digimon> {
-        val response =
+    override fun searchDigimon(id: Int): Flow<Digimon> {
+        TODO("Not yet implemented")
     }
 
 }

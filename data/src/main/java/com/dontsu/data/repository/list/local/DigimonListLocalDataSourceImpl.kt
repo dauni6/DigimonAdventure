@@ -1,5 +1,7 @@
 package com.dontsu.data.repository.list.local
 
-class DigimonListLocalDataSourceImpl {
+import com.dontsu.domain.repository.list.local.DigimonListLocalDataSource
+
+class DigimonListLocalDataSourceImpl: DigimonListLocalDataSource {
 
 }

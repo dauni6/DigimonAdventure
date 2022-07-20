@@ -3,6 +3,7 @@ package com.dontsu.digimonadventure.presentation.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import com.dontsu.digimonadventure.R
 import com.dontsu.digimonadventure.databinding.ActivityMainBinding
@@ -13,11 +14,14 @@ import timber.log.Timber
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
+    override val viewModel: MainViewModel by viewModels()
+
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        viewModel
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
