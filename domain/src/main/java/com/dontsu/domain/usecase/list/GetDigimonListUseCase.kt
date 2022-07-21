@@ -5,5 +5,5 @@ import com.dontsu.domain.model.UiState
 import kotlinx.coroutines.flow.Flow
 
 interface GetDigimonListUseCase {
-    suspend operator fun invoke(pageSize: Int): Flow<UiState<DigimonList>>
+    operator fun invoke(pageSize: Int): Flow<UiState<DigimonList>>
 }

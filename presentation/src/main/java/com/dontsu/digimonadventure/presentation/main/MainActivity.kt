@@ -26,14 +26,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun initObservers() {
-
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { state ->
-                    Timber.d("MainActivity collect")
+                viewModel.listUiState.collect { state ->
                     when(state) {
-                        UiState.Uninitialized -> Unit
-                        UiState.Loading -> {
+                        is UiState.Uninitialized -> {
+                            // do something before loading.
+                            // but it's not used in this project.
+                        }
+                        is UiState.Loading -> {
                             binding.progressBar.toVisible()
                         }
                         is UiState.Success -> {

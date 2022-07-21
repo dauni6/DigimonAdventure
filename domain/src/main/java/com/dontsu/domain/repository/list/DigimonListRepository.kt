@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DigimonListRepository {
 
-    suspend fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>>
+    fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>>
 
 }

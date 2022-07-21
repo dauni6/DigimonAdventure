@@ -1,4 +1,4 @@
-package com.dontsu.digimonadventure.di
+package com.dontsu.data.di
 
 import javax.inject.Qualifier
 

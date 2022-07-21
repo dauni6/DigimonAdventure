@@ -5,5 +5,5 @@ import com.dontsu.domain.model.UiState
 import kotlinx.coroutines.flow.Flow
 
 interface DigimonListRemoteDataSource {
-    suspend fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>>
+    fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>>
 }

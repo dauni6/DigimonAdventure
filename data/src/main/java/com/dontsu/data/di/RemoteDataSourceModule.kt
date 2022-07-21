@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -17,8 +18,11 @@ object RemoteDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideDigimonListRemoteDataSource(digimonApi: DigimonApi): DigimonListRemoteDataSource {
-        return DigimonListRemoteDataSourceImpl(api = digimonApi)
+    fun provideDigimonListRemoteDataSource(
+        digimonApi: DigimonApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonListRemoteDataSource {
+        return DigimonListRemoteDataSourceImpl(api = digimonApi, ioDispatcher = ioDispatcher)
     }
 
     @Provides
