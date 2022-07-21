@@ -1,4 +1,4 @@
-package com.dontsu.digimonadventure.presentation.base
+package com.dontsu.digimonadventure.ui.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

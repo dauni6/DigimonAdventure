@@ -1,4 +1,4 @@
-package com.dontsu.digimonadventure.presentation.main
+package com.dontsu.digimonadventure.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,24 +16,20 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val listUseCase: GetDigimonListUseCase,
-    private val searchUsecase: GetDigimonSearchUseCase
+    private val searchUseCase: GetDigimonSearchUseCase
 ) : ViewModel() {
 
     // for digimon list
-    private val _listUiState: MutableStateFlow<UiState<DigimonList>> = MutableStateFlow(UiState.Uninitialized)
-    val listUiState: StateFlow<UiState<DigimonList>> = _listUiState.asStateFlow()
+    private val _listUiState = listUseCase.invoke(pageSize = 100).stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = UiState.Uninitialized
+    )
+    val listUiState: StateFlow<UiState<DigimonList>> = _listUiState
 
     // for single digimon
-    private val _digimonUiState: MutableStateFlow<UiState<Digimon>> = MutableStateFlow(UiState.Uninitialized)
+    private val _digimonUiState: MutableStateFlow<UiState<Digimon>> = MutableStateFlow(UiState.Loading)
     val digimonUiState: StateFlow<UiState<Digimon>> = _digimonUiState.asStateFlow()
-
-    init {
-        viewModelScope.launch {
-            Timber.d("MainViewModel init... ${Thread.currentThread()} / ${this.coroutineContext}")
-            _listUiState.value = UiState.Loading
-            listUseCase.invoke(pageSize = 100).collect { _listUiState.value = it }
-        }
-    }
 
     fun searchDigimon(name: String) = viewModelScope.launch {
 

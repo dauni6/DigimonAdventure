@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DigimonAdventure">
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

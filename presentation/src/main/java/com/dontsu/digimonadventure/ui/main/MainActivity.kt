@@ -1,4 +1,4 @@
-package com.dontsu.digimonadventure.presentation.main
+package com.dontsu.digimonadventure.ui.main
 
 import android.view.Menu
 import android.view.MenuItem
@@ -11,7 +11,7 @@ import com.dontsu.digimonadventure.R
 import com.dontsu.digimonadventure.databinding.ActivityMainBinding
 import com.dontsu.digimonadventure.extensions.toGone
 import com.dontsu.digimonadventure.extensions.toVisible
-import com.dontsu.digimonadventure.presentation.base.BaseActivity
+import com.dontsu.digimonadventure.ui.base.BaseActivity
 import com.dontsu.domain.model.UiState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +27,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initObservers() {
         lifecycleScope.launch {
+            // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
+            // because when we use a coroutine which is created in the `lifecycle.launch`, even if the app goes in the background,
+            // a flow keeps collecting and it's not going to stop it.
+            // So, `repeatOnLifecycle` automatically cancels the ongoing coroutine for us when the lifecycle falls below the state(e.g, Lifecycle.State.STARTED).
+            // and then resume or recreate the coroutine for us.
+            // and if you collect single flow, then use `flowWithLifecycle`.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listUiState.collect { state ->
                     when(state) {
