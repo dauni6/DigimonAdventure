@@ -12,6 +12,7 @@ import com.dontsu.digimonadventure.databinding.ActivityMainBinding
 import com.dontsu.digimonadventure.extensions.toGone
 import com.dontsu.digimonadventure.extensions.toVisible
 import com.dontsu.digimonadventure.ui.base.BaseActivity
+import com.dontsu.digimonadventure.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
+    private val digimonListAdapter: DigimonListAdapter by lazy {
+        DigimonListAdapter { content ->
+            startActivity(DetailActivity.newInstance(this))
+        }
+    }
+
     override fun initObservers() {
         lifecycleScope.launch {
             // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
@@ -32,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             // a flow keeps collecting and it's not going to stop it.
             // So, `repeatOnLifecycle` automatically cancels the ongoing coroutine for us when the lifecycle falls below the state(e.g, Lifecycle.State.STARTED).
             // and then resume or recreate the coroutine for us.
-            // and if you collect single flow, then use `flowWithLifecycle`.
+            // and if you collect single flow, then you can use `flowWithLifecycle`.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.listUiState.collect { state ->
                     when(state) {
@@ -46,9 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         is UiState.Success -> {
                             val list = state.data.content
                             if (!list.isNullOrEmpty()) {
-                                list.forEach {
-                                    Timber.d("id = ${it?.id} / name = ${it?.name} / href = ${it?.href}")
-                                }
+                                digimonListAdapter.submitList(list)
                             }
                             binding.progressBar.toGone()
                         }
@@ -64,7 +69,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initViews() {
-
+        binding.recyclerView.apply {
+            adapter = digimonListAdapter
+        }
     }
 
     override fun initListeners() {

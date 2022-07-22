@@ -1,10 +1,11 @@
 package com.dontsu.data.model
 
-
 import com.dontsu.domain.model.Skill
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import javax.annotation.concurrent.Immutable
 
+@Immutable
 @JsonClass(generateAdapter = true)
 data class SkillResponse(
     @field:Json(name = "description")

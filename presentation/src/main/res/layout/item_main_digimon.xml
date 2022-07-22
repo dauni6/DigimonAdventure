@@ -11,18 +11,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@tools:sample/avatars"/>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/digimonNamteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:gravity="center"
-
         app:layout_constraintTop_toBottomOf="@id/digimonImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Agumon"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

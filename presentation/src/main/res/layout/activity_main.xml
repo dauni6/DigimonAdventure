@@ -7,31 +7,6 @@
     android:background="@drawable/background"
     tools:context=".ui.main.MainActivity">
 
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:id="@+id/appBarLayout"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="?android:attr/actionBarSize"-->
-<!--        android:elevation="6dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <androidx.appcompat.widget.Toolbar-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <androidx.appcompat.widget.SearchView-->
-<!--                android:id="@+id/searchView"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="end"-->
-<!--                app:queryBackground="@android:color/transparent"-->
-<!--                app:queryHint="@string/hint_search" />-->
-
-<!--        </androidx.appcompat.widget.Toolbar>-->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -46,7 +21,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:spanCount="2" />
+        app:spanCount="2"
+        tools:listitem="@layout/item_main_digimon" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,6 +1,7 @@
 package com.dontsu.data.repository.list.remote
 
 import android.util.Log
+import androidx.annotation.WorkerThread
 import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
 import com.dontsu.data.exceptions.NetworkFailureException
@@ -10,10 +11,9 @@ import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.coroutineContext
 
@@ -25,10 +25,10 @@ class DigimonListRemoteDataSourceImpl @Inject constructor(
     @IoDispatcher val ioDispatcher: CoroutineDispatcher
 ): DigimonListRemoteDataSource {
 
+    @WorkerThread
     override fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>> = flow<UiState<DigimonList>> {
         val response = api.getDigimonList(pageSize = pageSize)
         if (response.isSuccessful) {
-            Log.d("TEST", "DigimonListRemoteDataSourceImpl / ${Thread.currentThread()} / $coroutineContext")
             val digimons: DigimonListResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
             emit(UiState.Success(digimons.mapper()))
         } else {

@@ -1,5 +1,8 @@
 package com.dontsu.domain.model
 
+import javax.annotation.concurrent.Immutable
+
+@Immutable
 data class Skill(
     val description: String?,
     val id: Int?,
