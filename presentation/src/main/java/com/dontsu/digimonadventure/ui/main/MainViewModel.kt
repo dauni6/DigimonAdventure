@@ -10,12 +10,11 @@ import com.dontsu.domain.usecase.search.GetDigimonSearchUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val listUseCase: GetDigimonListUseCase,
+    listUseCase: GetDigimonListUseCase,
     private val searchUseCase: GetDigimonSearchUseCase
 ) : ViewModel() {
 
@@ -27,12 +26,14 @@ class MainViewModel @Inject constructor(
     )
     val listUiState: StateFlow<UiState<DigimonList>> = _listUiState
 
-    // for single digimon
-    private val _digimonUiState: MutableStateFlow<UiState<Digimon>> = MutableStateFlow(UiState.Loading)
-    val digimonUiState: StateFlow<UiState<Digimon>> = _digimonUiState.asStateFlow()
+    // for search list
+    private val _digimonUiState: MutableStateFlow<UiState<DigimonList>> = MutableStateFlow(UiState.Loading)
+    val digimonUiState: StateFlow<UiState<DigimonList>> = _digimonUiState.asStateFlow()
 
     fun searchDigimon(name: String) = viewModelScope.launch {
-
+        searchUseCase.invoke(name = name).collect {
+            _digimonUiState.value = it
+        }
     }
 
 }

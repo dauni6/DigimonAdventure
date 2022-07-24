@@ -1,6 +1,5 @@
 package com.dontsu.data.repository.list.remote
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
@@ -11,14 +10,11 @@ import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 /**
- * RemoteDataSourceImpl which practically requests and gets the data from api.
+ * DigimonListRemoteDataSourceImpl which practically requests and gets the data list from api.
  * */
 class DigimonListRemoteDataSourceImpl @Inject constructor(
     private val api: DigimonApi,

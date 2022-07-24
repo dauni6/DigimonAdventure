@@ -27,8 +27,11 @@ object RemoteDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideDigimonSearchRemoteDataSource(digimonApi: DigimonApi): DigimonSearchRemoteDataSource {
-        return DigimonSearchRemoteDataSourceImpl(api = digimonApi)
+    fun provideDigimonSearchRemoteDataSource(
+        digimonApi: DigimonApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonSearchRemoteDataSource {
+        return DigimonSearchRemoteDataSourceImpl(api = digimonApi, ioDispatcher = ioDispatcher)
     }
 
 }

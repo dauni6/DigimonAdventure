@@ -1,6 +1,6 @@
 package com.dontsu.data.repository.search
 
-import com.dontsu.domain.model.Digimon
+import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.repository.search.DigimonSearchRepository
 import com.dontsu.domain.repository.search.local.DigimonSearchLocalDataSource
@@ -13,7 +13,11 @@ class DigimonSearchRepositoryImpl @Inject constructor(
     private val localDataSource: DigimonSearchLocalDataSource
 ): DigimonSearchRepository {
 
-    override fun searchDigimon(id: Int): Flow<UiState<Digimon>> {
-        TODO("Not yet implemented")
+    override fun searchDigimon(name: String): Flow<UiState<DigimonList>> {
+//        val digimonFromDB = localDataSource.getDigimon()
+//        if (digimonFromDB.isNotEmpty) {
+//            return digimonListFromDB
+//        }
+       return remoteDataSource.searchDigimon(name = name)
     }
 }

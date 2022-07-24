@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dontsu.digimonadventure.databinding.ItemMainDigimonBinding
+import com.dontsu.digimonadventure.extensions.load
 import com.dontsu.domain.model.Content
 import timber.log.Timber
 
@@ -33,6 +34,7 @@ class DigimonListAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(content: Content) = with(binding) {
+            digimonImageView.load(content.name)
             digimonNamteTextView.text = content.name ?: "not found"
         }
     }

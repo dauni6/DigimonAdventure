@@ -12,7 +12,7 @@ interface DigimonApi {
     @GET("api/v1/digimon")
     suspend fun getDigimonList(@Query("pageSize") pageSize: Int = 100): Response<DigimonListResponse>
 
-    @GET("api/v1/digimon/{id}")
-    suspend fun searchDigimon(@Path("id") id: String): Response<DigimonResponse>
+    @GET("api/v1/digimon")
+    suspend fun searchDigimon(@Query("name") name: String): Response<DigimonListResponse>
 
 }

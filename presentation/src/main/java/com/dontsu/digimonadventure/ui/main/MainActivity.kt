@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.dontsu.digimonadventure.R
@@ -16,6 +17,7 @@ import com.dontsu.digimonadventure.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -28,11 +30,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private val digimonListAdapter: DigimonListAdapter by lazy {
         DigimonListAdapter { content ->
-            startActivity(DetailActivity.newInstance(this))
+            startActivity(DetailActivity.newInstance(context = this, id = content.id))
         }
     }
 
     override fun initObservers() {
+        // for digimon list
         lifecycleScope.launch {
             // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
             // because when we use a coroutine which is created in the `lifecycle.launch`, even if the app goes in the background,
@@ -66,6 +69,36 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         }
 
+        // for search digimon list
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.digimonUiState.collect { state ->
+                    when(state) {
+                        is UiState.Uninitialized -> {
+                            // do something before loading.
+                            // but it's not used in this project.
+                        }
+                        is UiState.Loading -> {
+                            binding.progressBar.toVisible()
+                        }
+                        is UiState.Success -> {
+                            val list = state.data.content
+                            if (!list.isNullOrEmpty()) {
+                                digimonListAdapter.submitList(list)
+                            }
+                            Timber.d("search list check = $list")
+                            digimonListAdapter.submitList(list)
+                            binding.progressBar.toGone()
+                        }
+                        is UiState.Error -> {
+                            Snackbar.make(binding.root, "error", Snackbar.LENGTH_SHORT).show()
+                            binding.progressBar.toGone()
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     override fun initViews() {
@@ -87,12 +120,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    Timber.d("onQueryTextSubmit = $query")
+                    viewModel.searchDigimon(query.trim())
                     return true
                 }
 
                 override fun onQueryTextChange(query: String): Boolean {
-                    Timber.d("onQueryTextChange = $query")
                     return false
                 }
 
