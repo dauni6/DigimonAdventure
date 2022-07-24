@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="detail_app_bar_height">278dp</dimen>
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="fab_bottom_padding">72dp</dimen>
+    <dimen name="description_min_height">555dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

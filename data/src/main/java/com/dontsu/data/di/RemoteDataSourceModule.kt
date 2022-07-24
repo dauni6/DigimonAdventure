@@ -1,8 +1,10 @@
 package com.dontsu.data.di
 
 import com.dontsu.data.network.DigimonApi
+import com.dontsu.data.repository.detail.remote.DigimonDetailRemoteDataSourceImpl
 import com.dontsu.data.repository.list.remote.DigimonListRemoteDataSourceImpl
 import com.dontsu.data.repository.search.remote.DigimonSearchRemoteDataSourceImpl
+import com.dontsu.domain.repository.detail.remote.DigimonDetailRemoteDataSource
 import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
 import com.dontsu.domain.repository.search.remote.DigimonSearchRemoteDataSource
 import dagger.Module
@@ -32,6 +34,15 @@ object RemoteDataSourceModule {
         @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonSearchRemoteDataSource {
         return DigimonSearchRemoteDataSourceImpl(api = digimonApi, ioDispatcher = ioDispatcher)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDigimonDetailRemoteDataSource(
+        digimonApi: DigimonApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonDetailRemoteDataSource {
+        return DigimonDetailRemoteDataSourceImpl(api = digimonApi, ioDispatcher = ioDispatcher)
     }
 
 }

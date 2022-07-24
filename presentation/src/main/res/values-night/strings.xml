@@ -4,4 +4,9 @@
     <string name="search">search</string>
     <string name="clear">clear</string>
     <string name="detail_menu_share">Share</string>
+    <string name="level">Level</string>
+    <string name="attribute">Attribute</string>
+    <string name="Type">Type</string>
+    <string name="fields">Fields</string>
+    <string name="like_floating_button_content_description">like floating button</string>
 </resources>

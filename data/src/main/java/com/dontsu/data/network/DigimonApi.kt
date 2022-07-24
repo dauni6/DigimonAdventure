@@ -15,4 +15,7 @@ interface DigimonApi {
     @GET("api/v1/digimon")
     suspend fun searchDigimon(@Query("name") name: String): Response<DigimonListResponse>
 
+    @GET("api/v1/digimon/{id}")
+    suspend fun getDigimon(@Path("id") id: Int): Response<DigimonResponse>
+
 }

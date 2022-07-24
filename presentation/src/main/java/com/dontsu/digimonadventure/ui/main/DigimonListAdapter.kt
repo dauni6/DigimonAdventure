@@ -6,18 +6,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dontsu.digimonadventure.databinding.ItemMainDigimonBinding
-import com.dontsu.digimonadventure.extensions.load
+import com.dontsu.digimonadventure.extensions.loadWithName
 import com.dontsu.domain.model.Content
-import timber.log.Timber
 
 class DigimonListAdapter(
     private val itemClicked: (Content) -> Unit
-): ListAdapter<Content, DigimonListAdapter.DigmonContentViewHolder>(diffCallback) {
+): ListAdapter<Content, DigimonListAdapter.DigimonContentViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DigmonContentViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DigimonContentViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemMainDigimonBinding.inflate(inflater, parent, false)
-        return DigmonContentViewHolder(binding = binding).apply {
+        return DigimonContentViewHolder(binding = binding).apply {
             itemView.setOnClickListener {
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION } ?: return@setOnClickListener
                 itemClicked(getItem(position))
@@ -25,17 +24,17 @@ class DigimonListAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: DigmonContentViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DigimonContentViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class DigmonContentViewHolder(
+    class DigimonContentViewHolder(
         private val binding: ItemMainDigimonBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(content: Content) = with(binding) {
-            digimonImageView.load(content.name)
-            digimonNamteTextView.text = content.name ?: "not found"
+            digimonImageView.loadWithName(content.name)
+            digimonNameTextView.text = content.name ?: "not found"
         }
     }
 

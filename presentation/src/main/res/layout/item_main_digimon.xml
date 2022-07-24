@@ -15,7 +15,7 @@
         tools:src="@tools:sample/avatars"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/digimonNamteTextView"
+        android:id="@+id/digimonNameTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="1"

@@ -22,7 +22,7 @@ class MainViewModel @Inject constructor(
     private val _listUiState = listUseCase.invoke(pageSize = 100).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = UiState.Uninitialized
+        initialValue = UiState.Loading
     )
     val listUiState: StateFlow<UiState<DigimonList>> = _listUiState
 

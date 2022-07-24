@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetDigimonSearchUseCaseImpl @Inject constructor(
     private val repository: DigimonSearchRepository
 ): GetDigimonSearchUseCase {
-    override suspend fun invoke(name: String): Flow<UiState<DigimonList>> {
+    override fun invoke(name: String): Flow<UiState<DigimonList>> {
         return repository.searchDigimon(name = name)
     }
 }

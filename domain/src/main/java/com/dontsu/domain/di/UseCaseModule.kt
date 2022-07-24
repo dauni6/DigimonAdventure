@@ -1,5 +1,7 @@
 package com.dontsu.domain.di
 
+import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCase
+import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCaseImpl
 import com.dontsu.domain.usecase.list.GetDigimonListUseCase
 import com.dontsu.domain.usecase.list.GetDigimonListUseCaseImpl
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCase
@@ -22,5 +24,10 @@ abstract class UseCaseModule {
     abstract fun bindGetDigimonSearchUseCase(
         getDigimonSearchUseCaseImpl: GetDigimonSearchUseCaseImpl
     ): GetDigimonSearchUseCase
+
+    @Binds
+    abstract fun bindGetDigimonDetailUseCase(
+        getDigimonDetailUseCaseImpl: GetDigimonDetailUseCaseImpl
+    ): GetDigimonDetailUseCase
 
 }
