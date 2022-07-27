@@ -2,6 +2,7 @@ package com.dontsu.digimonadventure.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.dontsu.data.util.Url.DIGIMON_IMAGE_URL
 
 fun ImageView.loadWithName(
@@ -20,5 +21,6 @@ fun ImageView.loadWithUrl(
     if (url.isNullOrEmpty()) return
     Glide.with(context)
         .load(url)
+        .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
 }

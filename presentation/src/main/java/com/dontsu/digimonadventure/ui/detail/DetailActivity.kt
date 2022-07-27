@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -39,7 +40,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                     }
                     is UiState.Success -> {
                         val digimon = state.data
-                        Timber.d("digimon check = $digimon")
                         setDigimon(digimon = digimon)
                         binding.progressBar.toGone()
                     }
@@ -67,6 +67,28 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                 else -> false
             }
         }
+
+        var isToolbarShown = false
+
+        // scroll change listener begins at Y = 0 when image is fully collapsed
+        detailScrollView.setOnScrollChangeListener(
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
+                // User scrolled past image to height of toolbar and the title text is
+                // underneath the toolbar, so the toolbar should be shown.
+                val shouldShowToolbar = scrollY > toolbar.height
+
+                // The new state of the toolbar differs from the previous state; update
+                // appbar and toolbar attributes.
+                if (isToolbarShown != shouldShowToolbar) {
+                    isToolbarShown = shouldShowToolbar
+
+                    // Use shadow animator to add elevation if toolbar is shown
+                    appbar.isActivated = shouldShowToolbar
+
+                    // Show the plant name if toolbar is shown
+                    collapsingToolbarLayout.isTitleEnabled = shouldShowToolbar
+                }
+        })
     }
 
     private fun createShareIntent() {
@@ -76,18 +98,49 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     @SuppressLint("SetTextI18n")
     private fun setDigimon(digimon: Digimon) = with(binding) {
         digimonImageView.loadWithUrl(digimon.image?.first()?.href)
-        digimonIdTextView.text = "Digicode : ${digimon.id.toString().ifEmpty { "not found" }}"
-        digimonNameTextView.text = digimon.name.toString().ifEmpty { "not found" }
-        levelValueTextView.text = digimon.level?.first()?.level.toString().ifEmpty { "not found" }
-        attributeValueTextView.text = digimon.attribute?.first()?.attribute.toString().ifEmpty { "not found" } // todo : attribute might be empty.
-        typeValueTextview.text = digimon.type?.first()?.type.toString().ifEmpty { "not found" }
+        digimonIdTextView.text = "Digicode : ${digimon.id.toString().ifEmpty { DIGIMON_UNKNOWN }}"
+        collapsingToolbarLayout.title = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
+        digimonNameTextView.text = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
+        digimon.level?.let {
+            levelValueTextView.text = if(it.isEmpty()) {
+                DIGIMON_UNKNOWN
+            } else {
+                it.first()?.level.toString()
+            }
+        }
+        digimon.attribute?.let {
+            attributeValueTextView.text = if (it.isEmpty()) {
+                DIGIMON_UNKNOWN
+            } else {
+                it.first()?.attribute.toString()
+            }
+        }
+        digimon.type?.let {
+            typeValueTextview.text = if (it.isEmpty()) {
+                DIGIMON_UNKNOWN
+            } else {
+                it.first()?.type.toString()
+            }
+        }
         // fields
-//        descriptionTextView.text = digimon.description?.takeIf { }
+
+        digimon.description?.let {
+            val description = it.find { description ->
+                description?.language == "en_us"
+            }
+            descriptionTextView.text = if (description == null) {
+                DIGIMON_NO_DESCRIPTION
+            } else {
+                description.description
+            }
+        }
     }
 
     companion object {
 
         const val DIGIMON_ID_KEY = "DIGIMON_ID_KEY"
+        const val DIGIMON_UNKNOWN = "unknown"
+        const val DIGIMON_NO_DESCRIPTION = "There is no description for this Digimon."
 
         fun newInstance(context: Context, id: Int?): Intent {
             return Intent(context, DetailActivity::class.java).apply {

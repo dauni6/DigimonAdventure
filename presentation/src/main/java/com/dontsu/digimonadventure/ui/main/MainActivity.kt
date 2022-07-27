@@ -84,7 +84,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             if (!list.isNullOrEmpty()) {
                                 digimonListAdapter.submitList(list)
                             }
-                            Timber.d("search list check = $list")
                             digimonListAdapter.submitList(list)
                             binding.progressBar.toGone()
                         }
@@ -102,6 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun initViews() {
         binding.recyclerView.apply {
             adapter = digimonListAdapter
+            addItemDecoration(DigimonAdapterItemDecoration())
         }
     }
 
