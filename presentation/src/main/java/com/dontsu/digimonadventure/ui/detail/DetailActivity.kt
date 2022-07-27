@@ -82,7 +82,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
         attributeValueTextView.text = digimon.attribute?.first()?.attribute.toString().ifEmpty { "not found" } // todo : attribute might be empty.
         typeValueTextview.text = digimon.type?.first()?.type.toString().ifEmpty { "not found" }
         // fields
-        descriptionTextView.text = digimon.description?.takeIf { }
+//        descriptionTextView.text = digimon.description?.takeIf { }
     }
 
     companion object {

@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.dontsu.digimonadventure.R
@@ -17,7 +16,6 @@ import com.dontsu.digimonadventure.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

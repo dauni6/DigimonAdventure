@@ -2,7 +2,6 @@ package com.dontsu.digimonadventure.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.usecase.list.GetDigimonListUseCase
@@ -27,10 +26,11 @@ class MainViewModel @Inject constructor(
     val listUiState: StateFlow<UiState<DigimonList>> = _listUiState
 
     // for search list
-    private val _digimonUiState: MutableStateFlow<UiState<DigimonList>> = MutableStateFlow(UiState.Loading)
+    private val _digimonUiState: MutableStateFlow<UiState<DigimonList>> = MutableStateFlow(UiState.Uninitialized)
     val digimonUiState: StateFlow<UiState<DigimonList>> = _digimonUiState.asStateFlow()
 
     fun searchDigimon(name: String) = viewModelScope.launch {
+        _digimonUiState.value = UiState.Loading
         searchUseCase.invoke(name = name).collect {
             _digimonUiState.value = it
         }
