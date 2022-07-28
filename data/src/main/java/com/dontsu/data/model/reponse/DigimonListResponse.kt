@@ -1,4 +1,4 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.reponse
 
 import com.dontsu.domain.model.DigimonList
 import com.squareup.moshi.Json

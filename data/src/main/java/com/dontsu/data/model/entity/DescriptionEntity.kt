@@ -1,18 +1,14 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.entity
 
+import androidx.room.Entity
 import com.dontsu.domain.model.Description
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
 
+@Entity
 @Immutable
-@JsonClass(generateAdapter = true)
-data class DescriptionResponse(
-    @field:Json(name = "description")
+data class DescriptionEntity(
     val description: String?,
-    @field:Json(name = "language")
     val language: String?,
-    @field:Json(name = "origin")
     val origin: String?
 ) {
     fun mapper(): Description = Description(

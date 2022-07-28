@@ -1,16 +1,13 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.entity
 
+import androidx.room.Entity
 import com.dontsu.domain.model.Field
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
 
+@Entity
 @Immutable
-@JsonClass(generateAdapter = true)
-data class FieldResponse(
-    @field:Json(name = "field")
+data class FieldEntity(
     val `field`: String?,
-    @field:Json(name = "id")
     val id: Int?
 ) {
     fun mapper(): Field = Field(

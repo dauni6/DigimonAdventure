@@ -1,18 +1,14 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.entity
 
+import androidx.room.Entity
 import com.dontsu.domain.model.PriorEvolution
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
 
+@Entity
 @Immutable
-@JsonClass(generateAdapter = true)
-data class PriorEvolutionResponse(
-    @field:Json(name = "condition")
+data class PriorEvolutionEntity(
     val condition: String?,
-    @field:Json(name = "digimon")
     val digimon: String?,
-    @field:Json(name = "id")
     val id: Int?
 ) {
     fun mapper(): PriorEvolution = PriorEvolution(

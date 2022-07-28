@@ -8,4 +8,6 @@
     <dimen name="description_min_height">555dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="toolbar_elevation">5dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
 </resources>

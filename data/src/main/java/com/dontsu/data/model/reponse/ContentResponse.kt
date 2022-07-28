@@ -1,4 +1,4 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.reponse
 
 import com.dontsu.domain.model.Content
 import com.squareup.moshi.Json

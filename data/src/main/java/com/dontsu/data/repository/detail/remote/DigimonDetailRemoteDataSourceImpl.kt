@@ -4,7 +4,7 @@ import androidx.annotation.WorkerThread
 import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
 import com.dontsu.data.exceptions.NetworkFailureException
-import com.dontsu.data.model.DigimonResponse
+import com.dontsu.data.model.reponse.DigimonResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.UiState

@@ -1,20 +1,20 @@
-package com.dontsu.data.model
+package com.dontsu.data.model.reponse
 
-import com.dontsu.domain.model.Type
+import com.dontsu.domain.model.Level
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
 
 @Immutable
 @JsonClass(generateAdapter = true)
-data class TypeResponse(
+data class LevelResponse(
     @field:Json(name = "id")
     val id: Int?,
-    @field:Json(name = "type")
-    val type: String?
+    @field:Json(name = "level")
+    val level: String?
 ) {
-    fun mapper(): Type = Type(
+    fun mapper(): Level = Level(
         id = id,
-        type = type
+        level = level
     )
 }
