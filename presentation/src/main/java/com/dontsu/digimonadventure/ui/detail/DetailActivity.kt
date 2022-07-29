@@ -16,6 +16,7 @@ import com.dontsu.digimonadventure.extensions.toVisible
 import com.dontsu.digimonadventure.ui.base.BaseActivity
 import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.UiState
+import com.dontsu.domain.model.successOrNull
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -39,8 +40,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                         binding.progressBar.toVisible()
                     }
                     is UiState.Success -> {
-                        val digimon = state.data
-                        setDigimon(digimon = digimon)
+                        val digimon =  state.successOrNull()
+                        if (digimon != null) {
+                            setDigimon(digimon = digimon)
+                        }
                         binding.progressBar.toGone()
                     }
                     is UiState.Error -> {

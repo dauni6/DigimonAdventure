@@ -14,6 +14,7 @@ import com.dontsu.digimonadventure.extensions.toVisible
 import com.dontsu.digimonadventure.ui.base.BaseActivity
 import com.dontsu.digimonadventure.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
+import com.dontsu.domain.model.successOrNull
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -52,7 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             binding.progressBar.toVisible()
                         }
                         is UiState.Success -> {
-                            val list = state.data.content
+                            val list = state.successOrNull()?.content
                             if (!list.isNullOrEmpty()) {
                                 digimonListAdapter.submitList(list)
                             }
