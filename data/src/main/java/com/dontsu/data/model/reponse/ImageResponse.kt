@@ -1,6 +1,5 @@
 package com.dontsu.data.model.reponse
 
-import com.dontsu.domain.model.Image
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
@@ -12,9 +11,4 @@ data class ImageResponse(
     val href: String?,
     @field:Json(name = "transparent")
     val transparent: Boolean?
-) {
-    fun mapper(): Image = Image(
-        href = href,
-        transparent = transparent
-    )
-}
+)

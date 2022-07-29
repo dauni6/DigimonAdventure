@@ -41,6 +41,7 @@ class DescriptionListTypeConverter @Inject constructor(
         return adapter.fromJson(value)
     }
 
+    @TypeConverter
     fun toJson(type: List<DescriptionEntity>): String {
         val listType = Types.newParameterizedType(List::class.java, DescriptionEntity::class.java)
         val adapter: JsonAdapter<List<DescriptionEntity>> = moshi.adapter(listType)
@@ -191,3 +192,4 @@ class TypeListTypeConverter @Inject constructor(
         return adapter.toJson(type)
     }
 }
+

@@ -1,7 +1,7 @@
 package com.dontsu.data.model.entity
 
 import androidx.room.Entity
-import com.dontsu.domain.model.Content
+import androidx.room.PrimaryKey
 import javax.annotation.concurrent.Immutable
 
 /**
@@ -10,13 +10,8 @@ import javax.annotation.concurrent.Immutable
 @Entity
 @Immutable
 data class ContentEntity(
-    val href: String?,
+    @PrimaryKey(autoGenerate = false)
     val id: Int?,
+    val href: String?,
     val name: String?
-) {
-    fun mapper(): Content = Content(
-        href = href,
-        id = id,
-        name = name
-    )
-}
+)

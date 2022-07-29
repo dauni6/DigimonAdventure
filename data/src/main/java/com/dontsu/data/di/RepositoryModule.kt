@@ -16,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -50,11 +51,13 @@ object RepositoryModule {
     @Singleton
     fun provideDigimonDetailRepository(
         remoteDataSource: DigimonDetailRemoteDataSource,
-        localDataSource: DigimonDetailLocalDataSource
+        localDataSource: DigimonDetailLocalDataSource,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonDetailRepository {
         return DigimonDetailRepositoryImpl(
             remoteDataSource = remoteDataSource,
-            localDataSource = localDataSource
+            localDataSource = localDataSource,
+            ioDispatcher = ioDispatcher
         )
     }
 

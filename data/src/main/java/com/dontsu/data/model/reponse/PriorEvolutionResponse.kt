@@ -1,6 +1,5 @@
 package com.dontsu.data.model.reponse
 
-import com.dontsu.domain.model.PriorEvolution
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
@@ -14,10 +13,4 @@ data class PriorEvolutionResponse(
     val digimon: String?,
     @field:Json(name = "id")
     val id: Int?
-) {
-    fun mapper(): PriorEvolution = PriorEvolution(
-        condition = condition,
-        digimon = digimon,
-        id = id
-    )
-}
+)

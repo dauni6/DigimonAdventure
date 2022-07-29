@@ -1,6 +1,5 @@
 package com.dontsu.data.model.reponse
 
-import com.dontsu.domain.model.Pageable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
@@ -23,13 +22,4 @@ data class PageableResponse(
     val totalElements: Int?,
     @field:Json(name = "totalPages")
     val totalPages: Int?
-) {
-    fun mapper(): Pageable = Pageable(
-        currentPage = currentPage,
-        elementsOnPage = elementsOnPage,
-        nextPage = nextPage,
-        previousPage = previousPage,
-        totalElements = totalElements,
-        totalPages = totalPages
-    )
-}
+)

@@ -53,8 +53,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     }
 
     override fun initListeners() = with(binding) {
-        toolbar.setNavigationOnClickListener { view ->
-            Timber.d("백버튼 클릭")
+        toolbar.setNavigationOnClickListener {
+            finish()
         }
 
         toolbar.setOnMenuItemClickListener { item ->

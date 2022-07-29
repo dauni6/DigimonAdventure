@@ -4,6 +4,7 @@ import androidx.annotation.WorkerThread
 import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
 import com.dontsu.data.exceptions.NetworkFailureException
+import com.dontsu.data.mapper.toDigimon
 import com.dontsu.data.model.reponse.DigimonResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.Digimon
@@ -29,7 +30,7 @@ class DigimonDetailRemoteDataSourceImpl @Inject constructor(
         val response = api.getDigimon(id = id)
         if (response.isSuccessful) {
             val digimon: DigimonResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-            emit(UiState.Success(digimon.mapper()))
+            emit(UiState.Success(toDigimon(digimon)))
         } else {
             throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
         }

@@ -1,5 +1,6 @@
 package com.dontsu.data.di
 
+import com.dontsu.data.db.DigimonDao
 import com.dontsu.data.repository.detail.local.DigimonDetailLocalDataSourceImpl
 import com.dontsu.data.repository.list.local.DigimonListLocalDataSourceImpl
 import com.dontsu.data.repository.search.local.DigimonSearchLocalDataSourceImpl
@@ -10,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -18,8 +20,11 @@ object LocalDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideDigimonListLocalDataSource(): DigimonListLocalDataSource {
-        return DigimonListLocalDataSourceImpl()
+    fun provideDigimonListLocalDataSource(
+        digimonDao: DigimonDao,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonListLocalDataSource {
+        return DigimonListLocalDataSourceImpl(dao = digimonDao, ioDispatcher = ioDispatcher)
     }
 
     @Provides
@@ -30,8 +35,11 @@ object LocalDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideDigimonDetailLocalDataSource(): DigimonDetailLocalDataSource {
-        return DigimonDetailLocalDataSourceImpl()
+    fun provideDigimonDetailLocalDataSource(
+        digimonDao: DigimonDao,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonDetailLocalDataSource {
+        return DigimonDetailLocalDataSourceImpl(dao = digimonDao, ioDispatcher = ioDispatcher)
     }
 
 }

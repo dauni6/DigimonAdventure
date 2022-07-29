@@ -17,10 +17,4 @@ data class ContentResponse(
     val id: Int?,
     @field:Json(name = "name")
     val name: String?
-) {
-    fun mapper(): Content = Content(
-        href = href,
-        id = id,
-        name = name
-    )
-}
+)

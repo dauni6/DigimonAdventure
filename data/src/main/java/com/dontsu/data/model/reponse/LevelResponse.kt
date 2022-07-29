@@ -1,6 +1,5 @@
 package com.dontsu.data.model.reponse
 
-import com.dontsu.domain.model.Level
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import javax.annotation.concurrent.Immutable
@@ -12,9 +11,4 @@ data class LevelResponse(
     val id: Int?,
     @field:Json(name = "level")
     val level: String?
-) {
-    fun mapper(): Level = Level(
-        id = id,
-        level = level
-    )
-}
+)

@@ -57,7 +57,7 @@ object DBModule {
 
     @Provides
     @Singleton
-    fun provideAttributListTypeConverter(moshi: Moshi): AttributeListTypeConverter = AttributeListTypeConverter(moshi)
+    fun provideAttributeListTypeConverter(moshi: Moshi): AttributeListTypeConverter = AttributeListTypeConverter(moshi)
 
     @Provides
     @Singleton

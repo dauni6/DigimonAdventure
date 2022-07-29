@@ -4,23 +4,23 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.entity.DigimonEntity
-import com.dontsu.data.model.entity.DigimonListEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DigimonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertDigimonList(digimons: List<DigimonListEntity>)
+    suspend fun insertDigimonList(digimons: List<ContentEntity>)
 
-    @Query("SELECT * FROM DigimonListEntity")
-    fun getAllDigimon(): Flow<List<DigimonListEntity>>
+    @Query("SELECT * FROM ContentEntity")
+    fun getAllDigimon(): Flow<List<ContentEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDigimon(digimon: DigimonEntity)
 
-    @Query("SELECT * FROM DigimonEntity")
-    fun getDigimon(): Flow<DigimonEntity> // todo : use `distinctUntilChanged()`.
+    @Query("SELECT * FROM DigimonEntity WHERE id = :id")
+    fun getDigimon(id: Int): Flow<DigimonEntity> // todo : use `distinctUntilChanged()`.
 
 }
