@@ -4,20 +4,20 @@ import com.dontsu.data.model.entity.NextEvolutionEntity
 import com.dontsu.data.model.reponse.NextEvolutionResponse
 import com.dontsu.domain.model.NextEvolution
 
-fun toNextEvolution(nextEvolutionResponse: NextEvolutionEntity?): NextEvolution = NextEvolution(
-    condition = nextEvolutionResponse?.condition,
-    digimon = nextEvolutionResponse?.digimon,
-    id = nextEvolutionResponse?.id
+fun NextEvolutionEntity.toNextEvolution(): NextEvolution = NextEvolution(
+    condition = condition,
+    digimon = digimon,
+    id = id
 )
 
-fun toNextEvolution(nextEvolutionResponse: NextEvolutionResponse?): NextEvolution = NextEvolution(
-    condition = nextEvolutionResponse?.condition,
-    digimon = nextEvolutionResponse?.digimon,
-    id = nextEvolutionResponse?.id
+fun NextEvolutionResponse.toNextEvolution(): NextEvolution = NextEvolution(
+    condition = condition,
+    digimon = digimon,
+    id = id
 )
 
-fun toNextEvolutionEntity(nextEvolution: NextEvolution): NextEvolutionEntity = NextEvolutionEntity(
-    condition = nextEvolution.condition,
-    digimon = nextEvolution.digimon,
-    id = nextEvolution.id
+fun NextEvolution.toNextEvolutionEntity(): NextEvolutionEntity = NextEvolutionEntity(
+    condition = condition,
+    digimon = digimon,
+    id = id
 )

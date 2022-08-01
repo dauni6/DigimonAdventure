@@ -27,7 +27,7 @@ class DigimonListRemoteDataSourceImpl @Inject constructor(
         val response = api.getDigimonList(pageSize = pageSize)
         if (response.isSuccessful) {
             val digimons: DigimonListResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-            emit(UiState.Success(toDigimonList(digimonList = digimons)))
+            emit(UiState.Success(digimons.toDigimonList()))
         } else {
             throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
         }

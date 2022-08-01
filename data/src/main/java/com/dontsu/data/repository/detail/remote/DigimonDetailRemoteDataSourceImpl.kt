@@ -30,7 +30,7 @@ class DigimonDetailRemoteDataSourceImpl @Inject constructor(
         val response = api.getDigimon(id = id)
         if (response.isSuccessful) {
             val digimon: DigimonResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-            emit(UiState.Success(toDigimon(digimon)))
+            emit(UiState.Success(digimon.toDigimon()))
         } else {
             throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
         }

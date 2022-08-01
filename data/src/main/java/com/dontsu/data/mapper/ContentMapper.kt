@@ -4,20 +4,20 @@ import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.reponse.ContentResponse
 import com.dontsu.domain.model.Content
 
-fun toContent(content: ContentEntity?): Content = Content(
-    href = content?.href,
-    id = content?.id,
-    name = content?.name
+fun ContentEntity.toContent(): Content = Content(
+    href = href,
+    id = id,
+    name = name
 )
 
-fun toContent(content: ContentResponse?): Content = Content(
-    href = content?.href,
-    id = content?.id,
-    name = content?.name
+fun ContentResponse.toContent(): Content = Content(
+    href = href,
+    id = id,
+    name = name
 )
 
-fun toContentEntity(content: Content): ContentEntity = ContentEntity(
-    href = content.href,
-    id = content.id,
-    name = content.name
+fun Content.toContentEntity(): ContentEntity = ContentEntity(
+    href = href,
+    id = id,
+    name = name
 )

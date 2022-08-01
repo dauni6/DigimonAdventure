@@ -6,18 +6,18 @@ import com.dontsu.data.model.entity.PageableEntity
 import com.dontsu.data.model.reponse.DigimonListResponse
 import com.dontsu.domain.model.DigimonList
 
-fun toDigimonList(digimonList: DigimonListEntity): DigimonList = DigimonList(
-    content = digimonList.content?.map { toContent(it) },
-    pageable = toPageable(digimonList.pageable)
+fun DigimonListEntity.toDigimonList(): DigimonList = DigimonList(
+    content = content?.map { it?.toContent() },
+    pageable = pageable?.toPageable()
 )
 
-fun toDigimonList(digimonList: DigimonListResponse?): DigimonList = DigimonList(
-    content = digimonList?.content?.map { toContent(it) },
-    pageable = toPageable(digimonList?.pageable)
+fun DigimonListResponse.toDigimonList(): DigimonList = DigimonList(
+    content = content?.map { it?.toContent() },
+    pageable = pageable?.toPageable()
 )
 
-fun toEntity(digimonList: DigimonList): DigimonListEntity = DigimonListEntity(
-    content = digimonList.content?.map {
+fun DigimonList.toEntity(): DigimonListEntity = DigimonListEntity(
+    content = content?.map {
         ContentEntity(
             id = it?.id,
             href = it?.href,
@@ -25,11 +25,11 @@ fun toEntity(digimonList: DigimonList): DigimonListEntity = DigimonListEntity(
         )
     },
     pageable = PageableEntity(
-        currentPage = digimonList.pageable?.currentPage,
-        elementsOnPage = digimonList.pageable?.elementsOnPage,
-        nextPage = digimonList.pageable?.nextPage,
-        previousPage = digimonList.pageable?.previousPage,
-        totalElements = digimonList.pageable?.totalElements,
-        totalPages = digimonList.pageable?.totalPages
+        currentPage = pageable?.currentPage,
+        elementsOnPage = pageable?.elementsOnPage,
+        nextPage = pageable?.nextPage,
+        previousPage = pageable?.previousPage,
+        totalElements = pageable?.totalElements,
+        totalPages = pageable?.totalPages
     )
 )

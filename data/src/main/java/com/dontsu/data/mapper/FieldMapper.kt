@@ -4,17 +4,17 @@ import com.dontsu.data.model.entity.FieldEntity
 import com.dontsu.data.model.reponse.FieldResponse
 import com.dontsu.domain.model.Field
 
-fun toField(field: FieldEntity?): Field = Field(
-    field = field?.field,
-    id = field?.id
+fun FieldEntity.toField(): Field = Field(
+    field = field,
+    id = id
 )
 
-fun toField(field: FieldResponse?): Field = Field(
-    field = field?.field,
-    id = field?.id
+fun FieldResponse.toField(): Field = Field(
+    field = field,
+    id = id
 )
 
-fun toFieldEntity(field: Field): FieldEntity = FieldEntity(
-    field = field.field,
-    id = field.id
+fun Field.toFieldEntity(): FieldEntity = FieldEntity(
+    field = field,
+    id = id
 )

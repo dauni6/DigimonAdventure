@@ -4,88 +4,88 @@ import com.dontsu.data.model.entity.*
 import com.dontsu.data.model.reponse.DigimonResponse
 import com.dontsu.domain.model.Digimon
 
-fun toDigimon(digimon: DigimonEntity): Digimon = Digimon(
-    attribute = digimon.attribute?.map { toAttribute(it) },
-    description = digimon.description?.map { toDescription(it) },
-    field = digimon.field?.map { toField(it) },
-    id = digimon.id,
-    image = digimon.image?.map { toImage(it) },
-    level = digimon.level?.map { toLevel(it) },
-    name = digimon.name,
-    nextEvolution = digimon.nextEvolution?.map { toNextEvolution(it) },
-    priorEvolution = digimon.priorEvolution?.map { toPriorEvolution(it) },
-    releaseDate = digimon.releaseDate,
-    skills = digimon.skills?.map { toSkill(it) },
-    type = digimon.type?.map { toType(it) },
-    xAntibody = digimon.xAntibody
+fun DigimonEntity.toDigimon(): Digimon = Digimon(
+    attribute = attribute?.map { it?.toAttribute() },
+    description = description?.map { it?.toDescription() },
+    field = field?.map { it?.toField() },
+    id = id,
+    image = image?.map { it?.toImage() },
+    level = level?.map { it?.toLevel() },
+    name = name,
+    nextEvolution = nextEvolution?.map { it?.toNextEvolution() },
+    priorEvolution = priorEvolution?.map { it?.toPriorEvolution() },
+    releaseDate = releaseDate,
+    skills = skills?.map { it?.toSkill() },
+    type = type?.map { it?.toType() },
+    xAntibody = xAntibody
 )
 
-fun toDigimon(digimon: DigimonResponse?): Digimon = Digimon(
-    attribute = digimon?.attribute?.map { toAttribute(it) },
-    description = digimon?.description?.map { toDescription(it) },
-    field = digimon?.field?.map { toField(it) },
-    id = digimon?.id,
-    image = digimon?.image?.map { toImage(it) },
-    level = digimon?.level?.map { toLevel(it) },
-    name = digimon?.name,
-    nextEvolution = digimon?.nextEvolution?.map { toNextEvolution(it) },
-    priorEvolution = digimon?.priorEvolution?.map { toPriorEvolution(it) },
-    releaseDate = digimon?.releaseDate,
-    skills = digimon?.skills?.map { toSkill(it) },
-    type = digimon?.type?.map { toType(it) },
-    xAntibody = digimon?.xAntibody
+fun DigimonResponse.toDigimon(): Digimon = Digimon(
+    attribute = attribute?.map { it?.toAttribute() },
+    description = description?.map { it?.toDescription() },
+    field = field?.map { it?.toField() },
+    id = id,
+    image = image?.map { it?.toImage() },
+    level = level?.map { it?.toLevel() },
+    name = name,
+    nextEvolution = nextEvolution?.map { it?.toNextEvolution() },
+    priorEvolution = priorEvolution?.map { it?.toPriorEvolution() },
+    releaseDate = releaseDate,
+    skills = skills?.map { it?.toSkill() },
+    type = type?.map { it?.toType() },
+    xAntibody = xAntibody
 )
 
-fun toDigimonEntity(digimon: Digimon): DigimonEntity = DigimonEntity(
-    attribute = digimon.attribute?.map {
+fun Digimon.toDigimonEntity(): DigimonEntity = DigimonEntity(
+    attribute = attribute?.map {
         AttributeEntity(
             attribute = it?.attribute,
             id = it?.id
         )
     },
-    description = digimon.description?.map {
+    description = description?.map {
         DescriptionEntity(
             description = it?.description,
             language = it?.language,
             origin = it?.origin
         )
     },
-    field = digimon.field?.map {
+    field = field?.map {
         FieldEntity(
             field = it?.field,
             id = it?.id
         )
     },
-    id = digimon.id,
-    image = digimon.image?.map {
+    id = id,
+    image = image?.map {
         ImageEntity(
             href = it?.href,
             transparent = it?.transparent
         )
     },
-    level = digimon.level?.map {
+    level = level?.map {
         LevelEntity(
             id = it?.id,
             level = it?.level
         )
     },
-    name = digimon.name,
-    nextEvolution = digimon.nextEvolution?.map {
+    name = name,
+    nextEvolution = nextEvolution?.map {
         NextEvolutionEntity(
             condition = it?.condition,
             digimon = it?.digimon,
             id = it?.id
         )
     },
-    priorEvolution = digimon.priorEvolution?.map {
+    priorEvolution = priorEvolution?.map {
         PriorEvolutionEntity(
             condition = it?.condition,
             digimon = it?.digimon,
             id = it?.id
         )
     },
-    releaseDate = digimon.releaseDate,
-    skills = digimon.skills?.map {
+    releaseDate = releaseDate,
+    skills = skills?.map {
         SkillEntity(
             description = it?.description,
             id = it?.id,
@@ -93,11 +93,11 @@ fun toDigimonEntity(digimon: Digimon): DigimonEntity = DigimonEntity(
             translation = it?.translation
         )
     },
-    type = digimon.type?.map {
+    type = type?.map {
         TypeEntity(
             id = it?.id,
             type = it?.type
         )
     },
-    xAntibody = digimon.xAntibody,
+    xAntibody = xAntibody,
 )

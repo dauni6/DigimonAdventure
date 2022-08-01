@@ -4,20 +4,20 @@ import com.dontsu.data.model.entity.DescriptionEntity
 import com.dontsu.data.model.reponse.DescriptionResponse
 import com.dontsu.domain.model.Description
 
-fun toDescription(description: DescriptionEntity?): Description = Description(
-    description = description?.description,
-    language = description?.language,
-    origin = description?.origin
+fun DescriptionEntity.toDescription(): Description = Description(
+    description = description,
+    language = language,
+    origin = origin
 )
 
-fun toDescription(description: DescriptionResponse?): Description = Description(
-    description = description?.description,
-    language = description?.language,
-    origin = description?.origin
+fun DescriptionResponse.toDescription(): Description = Description(
+    description = description,
+    language = language,
+    origin = origin
 )
 
-fun toDescriptionEntity(description: Description): DescriptionEntity = DescriptionEntity(
-    description = description.description,
-    language = description.language,
-    origin = description.origin
+fun Description.toDescriptionEntity(): DescriptionEntity = DescriptionEntity(
+    description = description,
+    language = language,
+    origin = origin
 )

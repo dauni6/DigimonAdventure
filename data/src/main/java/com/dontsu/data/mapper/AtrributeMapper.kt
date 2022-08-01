@@ -4,17 +4,17 @@ import com.dontsu.data.model.entity.AttributeEntity
 import com.dontsu.data.model.reponse.AttributeResponse
 import com.dontsu.domain.model.Attribute
 
-fun toAttribute(attribute: AttributeEntity?): Attribute = Attribute(
-    attribute = attribute?.attribute,
-    id = attribute?.id
+fun AttributeEntity.toAttribute(): Attribute = Attribute(
+    attribute = attribute,
+    id = id
 )
 
-fun toAttribute(attribute: AttributeResponse?): Attribute = Attribute(
-    attribute = attribute?.attribute,
-    id = attribute?.id
+fun AttributeResponse.toAttribute(): Attribute = Attribute(
+    attribute = attribute,
+    id = id
 )
 
-fun toAttributeEntity(attribute: Attribute): AttributeEntity = AttributeEntity(
-    attribute = attribute.attribute,
-    id = attribute.id
+fun Attribute.toAttributeEntity(): AttributeEntity = AttributeEntity(
+    attribute = attribute,
+    id = id
 )
