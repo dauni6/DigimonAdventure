@@ -15,6 +15,7 @@ import com.dontsu.digimonadventure.extensions.loadWithUrl
 import com.dontsu.digimonadventure.extensions.toGone
 import com.dontsu.digimonadventure.extensions.toVisible
 import com.dontsu.digimonadventure.ui.base.BaseActivity
+import com.dontsu.digimonadventure.util.FieldType
 import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
@@ -125,7 +126,22 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                 it.first()?.type.toString()
             }
         }
-        // fields
+
+        val fields = mutableListOf<Int>()
+        digimon.field?.let {
+            if (it.isNotEmpty()) {
+                it.forEach { fieldOrNull ->
+                    fieldOrNull?.let { field ->
+                        FieldType.values().find { fieldType ->
+                            field.id == fieldType.id
+                        }?.let { result ->
+                            fields.add(result.fieldRes)
+                        }
+                    }
+                }
+            }
+        }
+        
 
         digimon.description?.let {
             val description = it.find { description ->
