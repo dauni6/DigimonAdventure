@@ -8,6 +8,7 @@ import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.dontsu.data.exceptions.EmptyLocalDataException
 import com.dontsu.digimonadventure.R
 import com.dontsu.digimonadventure.databinding.ActivityDetailBinding
 import com.dontsu.digimonadventure.extensions.loadWithUrl
@@ -19,7 +20,6 @@ import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {

@@ -42,7 +42,10 @@ object RemoteDataSourceModule {
         digimonApi: DigimonApi,
         @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonDetailRemoteDataSource {
-        return DigimonDetailRemoteDataSourceImpl(api = digimonApi, ioDispatcher = ioDispatcher)
+        return DigimonDetailRemoteDataSourceImpl(
+            api = digimonApi,
+            ioDispatcher = ioDispatcher
+        )
     }
 
 }

@@ -51,13 +51,11 @@ object RepositoryModule {
     @Singleton
     fun provideDigimonDetailRepository(
         remoteDataSource: DigimonDetailRemoteDataSource,
-        localDataSource: DigimonDetailLocalDataSource,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher
+        localDataSource: DigimonDetailLocalDataSource
     ): DigimonDetailRepository {
         return DigimonDetailRepositoryImpl(
             remoteDataSource = remoteDataSource,
-            localDataSource = localDataSource,
-            ioDispatcher = ioDispatcher
+            localDataSource = localDataSource
         )
     }
 

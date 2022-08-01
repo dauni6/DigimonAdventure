@@ -1,9 +1,9 @@
 package com.dontsu.data.repository.detail.local
 
-import android.util.Log
 import androidx.annotation.WorkerThread
 import com.dontsu.data.db.DigimonDao
 import com.dontsu.data.di.IoDispatcher
+import com.dontsu.data.exceptions.EmptyLocalDataException
 import com.dontsu.data.mapper.toDigimon
 import com.dontsu.data.mapper.toDigimonEntity
 import com.dontsu.domain.model.Digimon
@@ -20,20 +20,22 @@ class DigimonDetailLocalDataSourceImpl @Inject constructor(
 ): DigimonDetailLocalDataSource {
 
     @WorkerThread
-    override fun getDigimon(id: Int): Flow<UiState<Digimon>> {
-        Log.d("TEST", "getDigimom() impl datasource")
+    override fun getDigimon(id: Int): Flow<UiState<Digimon>> = flow<UiState<Digimon>> {
         val digimon = dao.getDigimon(id = id)
-        return digimon.mapNotNull {
-            Log.d("TEST", "datasource it = $it")
-            UiState.Success(toDigimon(it))
-        }.catch {
-            Log.d("TEST", "datasource error")
+        digimon.collect {
+            if (it == null) {
+                throw EmptyLocalDataException("There is no digimon for this id.")
+            } else {
+                emit(UiState.Success(it.toDigimon()))
+            }
         }
+    }.catch {
+        emit(UiState.Error(it))
     }
 
     @WorkerThread
     override suspend fun insertDigimon(digimon: Digimon) = withContext(ioDispatcher) {
-        dao.insertDigimon(digimon = toDigimonEntity(digimon))
+        dao.insertDigimon(digimon = digimon.toDigimonEntity())
     }
 
 }
