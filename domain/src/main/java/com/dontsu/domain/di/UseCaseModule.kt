@@ -1,7 +1,6 @@
 package com.dontsu.domain.di
 
-import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCase
-import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCaseImpl
+import com.dontsu.domain.usecase.detail.*
 import com.dontsu.domain.usecase.list.GetDigimonListUseCase
 import com.dontsu.domain.usecase.list.GetDigimonListUseCaseImpl
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCase
@@ -33,5 +32,23 @@ abstract class UseCaseModule {
     abstract fun bindGetDigimonDetailUseCase(
         getDigimonDetailUseCaseImpl: GetDigimonDetailUseCaseImpl
     ): GetDigimonDetailUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindAddDigimonDetailFavoriteUseCase(
+        addDigimonDetailFavoriteUseCaseImpl: AddDigimonDetailFavoriteUseCaseImpl
+    ): AddDigimonDetailFavoriteUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindGetDigimonDetailFavoriteUseCase(
+       getDigimonDetailFavoriteUseCaseImpl: GetDigimonDetailFavoriteUseCaseImpl
+    ): GetDigimonDetailFavoriteUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindDeleteDigimonDeailFavoriteUseCase(
+        deleteDigimonDetailFavoriteUseCaseImpl: DeleteDigimonDetailFavoriteUseCaseImpl
+    ): DeleteDigimonDetailFavoriteUseCase
 
 }

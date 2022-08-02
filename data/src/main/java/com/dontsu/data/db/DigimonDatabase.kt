@@ -5,8 +5,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.entity.DigimonEntity
+import com.dontsu.data.model.entity.FavoriteEntity
 
-@Database(entities = [ContentEntity::class, DigimonEntity::class], version = 1, exportSchema = false)
+@Database(entities = [ContentEntity::class, DigimonEntity::class, FavoriteEntity::class], version = 1, exportSchema = false)
 @TypeConverters(
     value = [
         AttributeListTypeConverter::class,

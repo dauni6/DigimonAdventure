@@ -1,11 +1,10 @@
 package com.dontsu.data.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.entity.DigimonEntity
+import com.dontsu.data.model.entity.FavoriteEntity
+import com.dontsu.domain.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,5 +21,14 @@ interface DigimonDao {
 
     @Query("SELECT * FROM DigimonEntity WHERE id = :id")
     fun getDigimon(id: Int): Flow<DigimonEntity?> // todo : use `distinctUntilChanged()`.
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addFavorite(favorite: FavoriteEntity)
+
+    @Query("SELECT * FROM FavoriteEntity WHERE id = :id")
+    fun getFavorite(id: Int): Flow<FavoriteEntity?> // todo : use `distinctUntilChanged`.
+
+    @Delete
+    suspend fun deleteFavorite(favorite: FavoriteEntity)
 
 }

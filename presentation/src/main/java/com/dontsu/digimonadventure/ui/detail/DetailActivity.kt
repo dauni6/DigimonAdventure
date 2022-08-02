@@ -6,6 +6,7 @@ import android.content.Intent
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -23,8 +24,10 @@ import com.dontsu.domain.model.Field
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
 
@@ -53,6 +56,16 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                     is UiState.Error -> {
                         binding.progressBar.toGone()
                     }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isFavorite.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect { isFavorite ->
+                if (isFavorite) {
+                    binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.red, null))
+                } else {
+                    binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.white, null))
                 }
             }
         }
@@ -96,6 +109,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                     collapsingToolbarLayout.isTitleEnabled = shouldShowToolbar
                 }
         })
+
+        fabLike.setOnClickListener {
+            if (viewModel.isFavorite.value) {
+                viewModel.deleteFavorite()
+            } else {
+                viewModel.addFavorite()
+            }
+        }
     }
 
     private fun createShareIntent() {
@@ -167,7 +188,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     companion object {
 
         const val DIGIMON_ID_KEY = "DIGIMON_ID_KEY"
-        const val DIGIMON_UNKNOWN = "unknown"
+        const val DIGIMON_UNKNOWN = "Unknown"
         const val DIGIMON_NO_DESCRIPTION = "There is no description for this Digimon."
 
         fun newInstance(context: Context, id: Int?): Intent {
