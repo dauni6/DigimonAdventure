@@ -9,4 +9,5 @@
     <string name="Type">Type</string>
     <string name="fields">Fields</string>
     <string name="like_floating_button_content_description">like floating button</string>
+    <string name="no_available_fields">No available fields.</string>
 </resources>

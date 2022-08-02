@@ -3,20 +3,23 @@ package com.dontsu.digimonadventure.ui.detail
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.dontsu.data.exceptions.EmptyLocalDataException
 import com.dontsu.digimonadventure.R
 import com.dontsu.digimonadventure.databinding.ActivityDetailBinding
+import com.dontsu.digimonadventure.extensions.loadWithRes
 import com.dontsu.digimonadventure.extensions.loadWithUrl
 import com.dontsu.digimonadventure.extensions.toGone
 import com.dontsu.digimonadventure.extensions.toVisible
 import com.dontsu.digimonadventure.ui.base.BaseActivity
-import com.dontsu.digimonadventure.util.FieldType
+import com.dontsu.digimonadventure.util.findResOrNull
 import com.dontsu.domain.model.Digimon
+import com.dontsu.domain.model.Field
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import dagger.hilt.android.AndroidEntryPoint
@@ -127,21 +130,27 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
             }
         }
 
-        val fields = mutableListOf<Int>()
-        digimon.field?.let {
-            if (it.isNotEmpty()) {
-                it.forEach { fieldOrNull ->
-                    fieldOrNull?.let { field ->
-                        FieldType.values().find { fieldType ->
-                            field.id == fieldType.id
-                        }?.let { result ->
-                            fields.add(result.fieldRes)
-                        }
+        digimon.field?.let { fields: List<Field?> ->
+            if (fields.isNotEmpty()) {
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                ).apply {
+                    weight = 1f
+                }
+
+                fields.forEach { fieldOrNull ->
+                    findResOrNull(fieldOrNull?.id)?.let { res ->
+                        val fieldImageView = AppCompatImageView(this@DetailActivity)
+                        fieldImageView.layoutParams = layoutParams
+                        fieldImageView.loadWithRes(res)
+                        binding.fieldLinearLayout.addView(fieldImageView)
                     }
                 }
+            } else {
+                binding.noFieldTextView.toVisible()
             }
         }
-        
 
         digimon.description?.let {
             val description = it.find { description ->

@@ -174,51 +174,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/levelValueTextView" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/firstFieldImageView"
-                android:layout_width="48dp"
+            <LinearLayout
+                android:id="@+id/fieldLinearLayout"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
+                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/margin_normal"
                 app:layout_constraintTop_toBottomOf="@id/fieldTextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/secondFieldImageView"
-                tools:src="@tools:sample/avatars"/>
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/secondFieldImageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:layout_constraintTop_toTopOf="@id/firstFieldImageView"
-                app:layout_constraintStart_toEndOf="@id/firstFieldImageView"
-                app:layout_constraintEnd_toStartOf="@id/thirdFieldImageView"
-                tools:src="@tools:sample/avatars" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/thirdFieldImageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:layout_constraintTop_toTopOf="@id/secondFieldImageView"
-                app:layout_constraintStart_toEndOf="@id/secondFieldImageView"
-                app:layout_constraintEnd_toStartOf="@id/forthFieldImageView"
-                tools:src="@tools:sample/avatars" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/forthFieldImageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:layout_constraintTop_toTopOf="@id/thirdFieldImageView"
-                app:layout_constraintStart_toEndOf="@id/thirdFieldImageView"
-                app:layout_constraintEnd_toStartOf="@id/fifthFieldImageView"
-                tools:src="@tools:sample/avatars" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/fifthFieldImageView"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                app:layout_constraintTop_toTopOf="@id/forthFieldImageView"
-                app:layout_constraintStart_toEndOf="@id/forthFieldImageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@tools:sample/avatars" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/noFieldTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/no_available_fields"
+                android:textColor="@color/black"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="@id/fieldLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/fieldLinearLayout"
+                app:layout_constraintEnd_toEndOf="@id/fieldLinearLayout"
+                app:layout_constraintBottom_toBottomOf="@id/fieldLinearLayout"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/descriptionTextView"
@@ -229,7 +208,7 @@
                 android:layout_marginTop="@dimen/margin_small"
                 android:textIsSelectable="true"
                 android:textAppearance="?attr/textAppearanceBody1"
-                app:layout_constraintTop_toBottomOf="@id/firstFieldImageView"
+                app:layout_constraintTop_toBottomOf="@id/fieldLinearLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="digimon description"/>

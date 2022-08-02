@@ -59,3 +59,17 @@ enum class FieldType(
         fieldName = "Jungle Troopers"
     )
 }
+
+fun findResOrNull(id: Int?): Int? = when(id) {
+    FieldType.NATURE_SPIRITS.id -> FieldType.NATURE_SPIRITS.fieldRes
+    FieldType.VIRUS_BUSTERS.id -> FieldType.VIRUS_BUSTERS.fieldRes
+    FieldType.WIND_GUARDIANS.id -> FieldType.WIND_GUARDIANS.fieldRes
+    FieldType.UNKNOWN.id -> FieldType.UNKNOWN.fieldRes
+    FieldType.METAL_EMPIRE.id -> FieldType.METAL_EMPIRE.fieldRes
+    FieldType.DEEP_SAVERS.id -> FieldType.DEEP_SAVERS.fieldRes
+    FieldType.DARK_AREA.id -> FieldType.DARK_AREA.fieldRes
+    FieldType.NIGHTMARE_SOLDIERS.id -> FieldType.NIGHTMARE_SOLDIERS.fieldRes
+    FieldType.DRAGONS_ROAR.id -> FieldType.DRAGONS_ROAR.fieldRes
+    FieldType.JUNGLE_TROOPERS.id -> FieldType.JUNGLE_TROOPERS.fieldRes
+    else -> null
+}
