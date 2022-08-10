@@ -15,8 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -37,7 +35,7 @@ class DetailViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             flow {
-                emit(detailUseCase.invoke(id = digimonId))
+                emit(getDetailUseCase.invoke(id = digimonId))
             }.stateIn(this).collectLatest {
                 _uiState.value = it
             }
@@ -46,13 +44,6 @@ class DetailViewModel @Inject constructor(
 
     private val _isFavorite: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isFavorite = _isFavorite.asStateFlow()
-//    val isFavorite: StateFlow<Boolean> = getFavoriteUseCase.invoke(id = digimonId).map { state ->
-//        state.successOrNull()?.id == digimonId
-//    }.stateIn(
-//        scope = viewModelScope,
-//        started = SharingStarted.WhileSubscribed(5000),
-//        initialValue = false
-//    )
 
     init {
         viewModelScope.launch {

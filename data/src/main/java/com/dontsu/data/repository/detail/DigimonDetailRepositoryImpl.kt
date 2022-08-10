@@ -7,6 +7,7 @@ import com.dontsu.domain.model.successOrNull
 import com.dontsu.domain.repository.detail.DigimonDetailRepository
 import com.dontsu.domain.repository.detail.local.DigimonDetailLocalDataSource
 import com.dontsu.domain.repository.detail.remote.DigimonDetailRemoteDataSource
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DigimonDetailRepositoryImpl @Inject constructor(
