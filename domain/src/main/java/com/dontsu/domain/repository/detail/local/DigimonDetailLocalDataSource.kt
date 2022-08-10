@@ -5,7 +5,7 @@ import com.dontsu.domain.model.UiState
 import kotlinx.coroutines.flow.Flow
 
 interface DigimonDetailLocalDataSource {
-    fun getDigimon(id: Int): Flow<UiState<Digimon>>
+    suspend fun getDigimon(id: Int): UiState<Digimon>
 
     suspend fun insertDigimon(digimon: Digimon)
 }

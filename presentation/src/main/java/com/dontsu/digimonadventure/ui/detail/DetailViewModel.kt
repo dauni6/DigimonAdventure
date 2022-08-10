@@ -7,9 +7,8 @@ import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +19,17 @@ class DetailViewModel @Inject constructor(
     private val digimonId: Int = savedStateHandle[DetailActivity.DIGIMON_ID_KEY]
         ?: throw IllegalStateException("There is no value of the digimon id.")
 
-    val uiState: StateFlow<UiState<Digimon>> = detailUseCase.invoke(id = digimonId).stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = UiState.Loading
-    )
+    private val _uiState: MutableStateFlow<UiState<Digimon>> = MutableStateFlow(UiState.Loading)
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            flow {
+                emit(detailUseCase.invoke(id = digimonId))
+            }.stateIn(this).collectLatest {
+                _uiState.value = it
+            }
+        }
+    }
 
 }

@@ -5,7 +5,7 @@ import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
 import com.dontsu.data.exceptions.NetworkFailureException
 import com.dontsu.data.mapper.toDigimonList
-import com.dontsu.data.model.reponse.DigimonListResponse
+import com.dontsu.data.model.response.DigimonListResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState

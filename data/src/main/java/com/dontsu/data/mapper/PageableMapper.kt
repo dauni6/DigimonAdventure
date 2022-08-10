@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.PageableEntity
-import com.dontsu.data.model.reponse.PageableResponse
+import com.dontsu.data.model.response.PageableResponse
 import com.dontsu.domain.model.Pageable
 
 fun PageableEntity.toPageable(): Pageable = Pageable(

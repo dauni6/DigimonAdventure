@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetDigimonDetailUseCaseImpl @Inject constructor(
     private val repository: DigimonDetailRepository
 ): GetDigimonDetailUseCase {
-    override fun invoke(id: Int): Flow<UiState<Digimon>> {
+    override suspend fun invoke(id: Int): UiState<Digimon> {
         return repository.getDigimon(id = id)
     }
 }

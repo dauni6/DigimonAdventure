@@ -1,7 +1,7 @@
 package com.dontsu.data.network
 
-import com.dontsu.data.model.reponse.DigimonListResponse
-import com.dontsu.data.model.reponse.DigimonResponse
+import com.dontsu.data.model.response.DigimonListResponse
+import com.dontsu.data.model.response.DigimonResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

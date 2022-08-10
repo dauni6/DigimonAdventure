@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.PriorEvolutionEntity
-import com.dontsu.data.model.reponse.PriorEvolutionResponse
+import com.dontsu.data.model.response.PriorEvolutionResponse
 import com.dontsu.domain.model.PriorEvolution
 
 fun PriorEvolutionEntity.toPriorEvolution(): PriorEvolution = PriorEvolution(

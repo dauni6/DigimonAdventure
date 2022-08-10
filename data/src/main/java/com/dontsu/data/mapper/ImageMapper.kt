@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.ImageEntity
-import com.dontsu.data.model.reponse.ImageResponse
+import com.dontsu.data.model.response.ImageResponse
 import com.dontsu.domain.model.Image
 
 fun ImageEntity.toImage(): Image = Image(

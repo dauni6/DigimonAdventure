@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.NextEvolutionEntity
-import com.dontsu.data.model.reponse.NextEvolutionResponse
+import com.dontsu.data.model.response.NextEvolutionResponse
 import com.dontsu.domain.model.NextEvolution
 
 fun NextEvolutionEntity.toNextEvolution(): NextEvolution = NextEvolution(

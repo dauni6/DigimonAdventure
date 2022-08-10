@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.DescriptionEntity
-import com.dontsu.data.model.reponse.DescriptionResponse
+import com.dontsu.data.model.response.DescriptionResponse
 import com.dontsu.domain.model.Description
 
 fun DescriptionEntity.toDescription(): Description = Description(
