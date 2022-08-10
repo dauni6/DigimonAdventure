@@ -3,7 +3,7 @@ package com.dontsu.data.mapper
 import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.entity.DigimonListEntity
 import com.dontsu.data.model.entity.PageableEntity
-import com.dontsu.data.model.reponse.DigimonListResponse
+import com.dontsu.data.model.response.DigimonListResponse
 import com.dontsu.domain.model.DigimonList
 
 fun DigimonListEntity.toDigimonList(): DigimonList = DigimonList(

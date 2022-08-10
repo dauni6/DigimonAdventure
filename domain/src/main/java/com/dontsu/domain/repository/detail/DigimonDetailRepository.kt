@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DigimonDetailRepository {
 
-    fun getDigimon(id: Int): Flow<UiState<Digimon>>
+    suspend fun getDigimon(id: Int): UiState<Digimon>
 
     suspend fun addFavorite(favorite: Favorite)
 

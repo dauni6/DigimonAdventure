@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.*
-import com.dontsu.data.model.reponse.DigimonResponse
+import com.dontsu.data.model.response.DigimonResponse
 import com.dontsu.domain.model.Digimon
 
 fun DigimonEntity.toDigimon(): Digimon = Digimon(

@@ -12,6 +12,8 @@ import com.dontsu.domain.usecase.detail.DeleteDigimonDetailFavoriteUseCase
 import com.dontsu.domain.usecase.detail.GetDigimonDetailFavoriteUseCase
 import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -29,11 +31,18 @@ class DetailViewModel @Inject constructor(
     private val digimonId: Int = savedStateHandle[DetailActivity.DIGIMON_ID_KEY]
         ?: throw IllegalStateException("There is no value of the digimon id.")
 
-    val uiState: StateFlow<UiState<Digimon>> = getDetailUseCase.invoke(id = digimonId).stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = UiState.Loading
-    )
+    private val _uiState: MutableStateFlow<UiState<Digimon>> = MutableStateFlow(UiState.Loading)
+    val uiState = _uiState.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            flow {
+                emit(detailUseCase.invoke(id = digimonId))
+            }.stateIn(this).collectLatest {
+                _uiState.value = it
+            }
+        }
+    }
 
     private val _isFavorite: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isFavorite = _isFavorite.asStateFlow()

@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.AttributeEntity
-import com.dontsu.data.model.reponse.AttributeResponse
+import com.dontsu.data.model.response.AttributeResponse
 import com.dontsu.domain.model.Attribute
 
 fun AttributeEntity.toAttribute(): Attribute = Attribute(

@@ -20,7 +20,7 @@ interface DigimonDao {
     suspend fun insertDigimon(digimon: DigimonEntity)
 
     @Query("SELECT * FROM DigimonEntity WHERE id = :id")
-    fun getDigimon(id: Int): Flow<DigimonEntity?> // todo : use `distinctUntilChanged()`.
+    fun getDigimon(id: Int): DigimonEntity? // todo : use `distinctUntilChanged()`.
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavorite(favorite: FavoriteEntity)

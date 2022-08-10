@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.FieldEntity
-import com.dontsu.data.model.reponse.FieldResponse
+import com.dontsu.data.model.response.FieldResponse
 import com.dontsu.domain.model.Field
 
 fun FieldEntity.toField(): Field = Field(

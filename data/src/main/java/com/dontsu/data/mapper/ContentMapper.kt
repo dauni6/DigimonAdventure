@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.ContentEntity
-import com.dontsu.data.model.reponse.ContentResponse
+import com.dontsu.data.model.response.ContentResponse
 import com.dontsu.domain.model.Content
 
 fun ContentEntity.toContent(): Content = Content(

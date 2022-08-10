@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.SkillEntity
-import com.dontsu.data.model.reponse.SkillResponse
+import com.dontsu.data.model.response.SkillResponse
 import com.dontsu.domain.model.Skill
 
 fun SkillEntity.toSkill(): Skill = Skill(

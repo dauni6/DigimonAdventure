@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.TypeEntity
-import com.dontsu.data.model.reponse.TypeResponse
+import com.dontsu.data.model.response.TypeResponse
 import com.dontsu.domain.model.Type
 
 fun TypeEntity.toType(): Type = Type(

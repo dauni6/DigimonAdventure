@@ -1,7 +1,7 @@
 package com.dontsu.data.mapper
 
 import com.dontsu.data.model.entity.LevelEntity
-import com.dontsu.data.model.reponse.LevelResponse
+import com.dontsu.data.model.response.LevelResponse
 import com.dontsu.domain.model.Level
 
 fun LevelEntity.toLevel(): Level = Level(

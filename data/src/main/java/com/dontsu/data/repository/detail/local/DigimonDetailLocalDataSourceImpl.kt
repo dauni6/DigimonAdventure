@@ -13,7 +13,6 @@ import com.dontsu.domain.model.Favorite
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.repository.detail.local.DigimonDetailLocalDataSource
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -23,19 +22,17 @@ class DigimonDetailLocalDataSourceImpl @Inject constructor(
 ): DigimonDetailLocalDataSource {
 
     @WorkerThread
-    override fun getDigimon(id: Int): Flow<UiState<Digimon>> = flow<UiState<Digimon>> {
-        val digimon = dao.getDigimon(id = id)
-        digimon.collect {
-            if (it == null) {
-                throw EmptyLocalDataException("There is no data for this id.")
+    override suspend fun getDigimon(id: Int): UiState<Digimon> {
+        return try {
+            val digimon = dao.getDigimon(id = id)
+            if (digimon == null) {
+                throw EmptyLocalDataException("There is no digimon for this id.")
             } else {
-                emit(UiState.Success(it.toDigimon()))
+                UiState.Success(digimon.toDigimon())
             }
+        } catch (e: Exception) {
+            UiState.Error(e)
         }
-    }
-    .flowOn(ioDispatcher)
-    .catch {
-        emit(UiState.Error(it))
     }
 
     @WorkerThread
