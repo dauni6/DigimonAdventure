@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.dontsu.digimonadventure.R
@@ -18,6 +19,7 @@ import com.dontsu.domain.model.successOrNull
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -72,10 +74,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.digimonUiState.collect { state ->
                     when(state) {
-                        is UiState.Uninitialized -> {
-                            // do something before loading.
-                            // but it's not used in this project.
-                        }
+                        is UiState.Uninitialized -> Unit // nothing to do
                         is UiState.Loading -> {
                             binding.progressBar.toVisible()
                         }
@@ -96,6 +95,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         }
 
+        lifecycleScope.launch {
+            viewModel.refresh.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect { state ->
+                when(state) {
+                    is UiState.Uninitialized -> Unit // nothing to do
+                    is UiState.Loading -> binding.swiperefresh.isRefreshing = true
+                    is UiState.Success -> binding.swiperefresh.isRefreshing = false
+                    is UiState.Error -> binding.swiperefresh.isRefreshing = false
+                }
+            }
+        }
+
     }
 
     override fun initViews() {
@@ -105,8 +115,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    override fun initListeners() {
-
+    override fun initListeners() = with(binding) {
+        swiperefresh.setOnRefreshListener { viewModel.refresh() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -114,6 +124,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         val searchItem: MenuItem = menu.findItem(R.id.menu_item_search)
         val searchView = searchItem.actionView as SearchView
+
+        val clearItem: MenuItem = menu.findItem(R.id.menu_item_clear)
 
         searchView.apply {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -129,11 +141,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             })
         }
 
+        clearItem.setOnMenuItemClickListener {
+            searchView.setQuery("", false)
+            true
+        }
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return super.onOptionsItemSelected(item)
     }
+
+}
+
+enum class SwipeState {
 
 }
