@@ -18,9 +18,11 @@ import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -36,15 +38,42 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initObservers() {
         // for digimon list
+//        lifecycleScope.launch {
+//            // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
+//            // because when we use a coroutine which is created in the `lifecycle.launch`, even if the app goes in the background,
+//            // a flow keeps collecting and it's not going to stop it.
+//            // So, `repeatOnLifecycle` automatically cancels the ongoing coroutine for us when the lifecycle falls below the state(e.g, Lifecycle.State.STARTED).
+//            // and then resume or recreate the coroutine for us.
+//            // and if you collect single flow, then you can use `flowWithLifecycle`.
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.listUiState.collect { state ->
+//                    when(state) {
+//                        is UiState.Uninitialized -> {
+//                            // do something before loading.
+//                            // but it's not used in this project.
+//                        }
+//                        is UiState.Loading -> {
+//                            binding.progressBar.toVisible()
+//                        }
+//                        is UiState.Success -> {
+//                            val list = state.successOrNull()?.content
+//                            if (!list.isNullOrEmpty()) {
+//                                digimonListAdapter.submitList(list)
+//                            }
+//                            binding.progressBar.toGone()
+//                        }
+//                        is UiState.Error -> {
+//                            Snackbar.make(binding.root, "error", Snackbar.LENGTH_SHORT).show()
+//                            binding.progressBar.toGone()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
         lifecycleScope.launch {
-            // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
-            // because when we use a coroutine which is created in the `lifecycle.launch`, even if the app goes in the background,
-            // a flow keeps collecting and it's not going to stop it.
-            // So, `repeatOnLifecycle` automatically cancels the ongoing coroutine for us when the lifecycle falls below the state(e.g, Lifecycle.State.STARTED).
-            // and then resume or recreate the coroutine for us.
-            // and if you collect single flow, then you can use `flowWithLifecycle`.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.listUiState.collect { state ->
+                viewModel.testListUiState.collect { state ->
                     when(state) {
                         is UiState.Uninitialized -> {
                             // do something before loading.
@@ -55,6 +84,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                         }
                         is UiState.Success -> {
                             val list = state.successOrNull()?.content
+                            list?.forEach {
+                                Timber.d("view - ${it?.name}")
+                            }
                             if (!list.isNullOrEmpty()) {
                                 digimonListAdapter.submitList(list)
                             }
@@ -99,9 +131,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             viewModel.refresh.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect { state ->
                 when(state) {
                     is UiState.Uninitialized -> Unit // nothing to do
-                    is UiState.Loading -> binding.swiperefresh.isRefreshing = true
-                    is UiState.Success -> binding.swiperefresh.isRefreshing = false
-                    is UiState.Error -> binding.swiperefresh.isRefreshing = false
+                    is UiState.Loading -> {
+
+                        binding.swiperefresh.isRefreshing = true
+                    }
+                    is UiState.Success -> {
+                        binding.swiperefresh.isRefreshing = false
+                    }
+                    is UiState.Error -> {
+                        binding.swiperefresh.isRefreshing = false
+                    }
                 }
             }
         }
@@ -150,11 +189,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // nothing to do
         return super.onOptionsItemSelected(item)
     }
-
-}
-
-enum class SwipeState {
 
 }
