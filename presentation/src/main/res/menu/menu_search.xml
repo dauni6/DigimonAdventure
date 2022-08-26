@@ -2,12 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_item_search"
+        android:id="@+id/menu_item_refresh"
         android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:icon="@drawable/ic_refresh"
+        app:iconTint="@color/white"
         app:showAsAction="ifRoom" />
-
-    <item android:id="@+id/menu_item_clear"
-        android:title="@string/clear"
-        app:showAsAction="never"/>
 </menu>

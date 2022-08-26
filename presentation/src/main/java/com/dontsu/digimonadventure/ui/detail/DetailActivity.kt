@@ -41,7 +41,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                 when(state) {
                     is UiState.Uninitialized -> {
                         // do something before loading.
-                        // but it's not used in this project.
+                        // but it's not used now.
                     }
                     is UiState.Loading -> {
                         binding.progressBar.toVisible()

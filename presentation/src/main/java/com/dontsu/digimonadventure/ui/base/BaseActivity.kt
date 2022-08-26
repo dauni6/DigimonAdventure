@@ -26,6 +26,10 @@ abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivit
 
     open fun initListeners() = Unit
 
+    /**
+     * this method will be used for Observing StateFlow<T>.
+     * it’s recommended to call this API in the activity’s onCreate to avoid unexpected behaviors.
+     * */
     open fun initObservers() = Unit
 
 }
