@@ -16,5 +16,6 @@ rootProject.name = "DigimonAdventure"
 include(
     ":presentation",
     ":data",
-    ":domain"
+    ":domain",
+    ":di"
 )
