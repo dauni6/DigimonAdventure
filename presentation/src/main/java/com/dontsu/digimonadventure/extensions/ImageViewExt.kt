@@ -4,7 +4,8 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.dontsu.data.util.Url.DIGIMON_IMAGE_URL
+
+const val DIGIMON_IMAGE_URL = "https://digimon-api.com/images/digimon/w/"
 
 fun ImageView.loadWithName(
     name: String?

@@ -13,6 +13,8 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "DigimonAdventure"
-include ':presentation'
-include ':data'
-include ':domain'
+include(
+    ":presentation",
+    ":data",
+    ":domain"
+)

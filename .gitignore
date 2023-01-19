@@ -1,4 +1,7 @@
+# IntelliJ
 *.iml
+
+# Gradle files
 .gradle
 /local.properties
 /.idea/caches
@@ -10,8 +13,10 @@
 .DS_Store
 /build
 /captures
+# External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 .cxx
+# Local configuration file (sdk path, etc)
 local.properties
 # Created by https://www.toptal.com/developers/gitignore/api/kotlin,androidstudio,android
 # Edit at https://www.toptal.com/developers/gitignore?templates=kotlin,androidstudio,android
@@ -20,9 +25,6 @@ local.properties
 # Gradle files
 .gradle/
 build/
-
-# Local configuration file (sdk path, etc)
-local.properties
 
 # Log/OS Files
 *.log
@@ -34,8 +36,7 @@ captures/
 *.apk
 output.json
 
-# IntelliJ
-*.iml
+
 .idea/
 misc.xml
 deploymentTargetDropDown.xml
@@ -99,8 +100,7 @@ bin/
 gen/
 out/
 
-# Gradle files
-.gradle
+
 
 # Signing files
 .signing/
@@ -130,8 +130,6 @@ proguard/
 
 # Android Patch
 
-# External native build folder generated in Android Studio 2.2 and later
-.externalNativeBuild
 
 # NDK
 obj/

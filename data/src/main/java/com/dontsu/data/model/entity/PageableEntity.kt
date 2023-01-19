@@ -1,11 +1,8 @@
 package com.dontsu.data.model.entity
 
-import javax.annotation.concurrent.Immutable
-
 /**
  * Used for getting Digimon list.
  * */
-@Immutable
 data class PageableEntity(
     val currentPage: Int?,
     val elementsOnPage: Int?,

@@ -1,4 +1,4 @@
-package com.dontsu.domain.di
+package com.dontsu.digimonadventure.di
 
 import com.dontsu.domain.usecase.detail.*
 import com.dontsu.domain.usecase.list.GetDigimonListUseCase

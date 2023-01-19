@@ -7,10 +7,7 @@ import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.Favorite
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
-import com.dontsu.domain.usecase.detail.AddDigimonDetailFavoriteUseCase
-import com.dontsu.domain.usecase.detail.DeleteDigimonDetailFavoriteUseCase
-import com.dontsu.domain.usecase.detail.GetDigimonDetailFavoriteUseCase
-import com.dontsu.domain.usecase.detail.GetDigimonDetailUseCase
+import com.dontsu.domain.usecase.detail.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -20,10 +17,10 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    getDetailUseCase: GetDigimonDetailUseCase,
-    private val addFavoriteUseCase: AddDigimonDetailFavoriteUseCase,
-    getFavoriteUseCase: GetDigimonDetailFavoriteUseCase,
-    private val deleteFavoriteUseCase: DeleteDigimonDetailFavoriteUseCase,
+    getDetailUseCase: GetDigimonDetailUseCaseImpl,
+    private val addFavoriteUseCase: AddDigimonDetailFavoriteUseCaseImpl,
+    getFavoriteUseCase: GetDigimonDetailFavoriteUseCaseImpl,
+    private val deleteFavoriteUseCase: DeleteDigimonDetailFavoriteUseCaseImpl,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
     private val digimonId: Int = savedStateHandle[DetailActivity.DIGIMON_ID_KEY]
