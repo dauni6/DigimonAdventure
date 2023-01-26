@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
     id("kotlin-parcelize")
@@ -7,27 +7,25 @@ plugins {
 }
 
 android {
+    namespace = "com.dontsu.presentation"
     compileSdk = Project.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.dontsu.digimonadventure"
         minSdk = Project.MIN_SDK
         targetSdk = Project.TARGET_SDK
-        versionCode = Project.versionCode
-        versionName = Project.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
+        release {
+            isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = Project.javaVersion
         targetCompatibility = Project.javaVersion
@@ -40,16 +38,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
-    kapt {
-        generateStubs = true
-    }
 }
 
 dependencies {
-    // module
     implementation(project(":domain"))
-    implementation(project(":data"))
 
     implementation(Dependencies.Kotlin.core_ktx)
     implementation(Dependencies.Appcompat.appcompat)
@@ -83,5 +75,4 @@ dependencies {
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.ext_junit)
     androidTestImplementation(Dependencies.Test.espresso_core)
-
 }

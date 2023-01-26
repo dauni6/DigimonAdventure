@@ -2,7 +2,6 @@ package com.dontsu.data.repository.detail.local
 
 import androidx.annotation.WorkerThread
 import com.dontsu.data.db.DigimonDao
-import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyLocalDataException
 import com.dontsu.data.mapper.toDigimon
 import com.dontsu.data.mapper.toDigimonEntity
@@ -22,7 +21,7 @@ import javax.inject.Inject
 
 class DigimonDetailLocalDataSourceImpl @Inject constructor(
     private val dao: DigimonDao,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ): DigimonDetailLocalDataSource {
 
     @WorkerThread

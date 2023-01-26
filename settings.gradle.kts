@@ -14,8 +14,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DigimonAdventure"
 include(
+    ":app",
     ":presentation",
-    ":data",
     ":domain",
-    ":di"
+    ":data"
 )

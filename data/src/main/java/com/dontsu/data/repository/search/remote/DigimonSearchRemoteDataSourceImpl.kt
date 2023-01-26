@@ -1,7 +1,6 @@
 package com.dontsu.data.repository.search.remote
 
 import androidx.annotation.WorkerThread
-import com.dontsu.data.di.IoDispatcher
 import com.dontsu.data.exceptions.EmptyBodyException
 import com.dontsu.data.exceptions.NetworkFailureException
 import com.dontsu.data.mapper.toDigimonList
@@ -22,7 +21,7 @@ import javax.inject.Inject
  * */
 class DigimonSearchRemoteDataSourceImpl @Inject constructor(
     private val api: DigimonApi,
-    @IoDispatcher val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher
 ): DigimonSearchRemoteDataSource {
 
     @WorkerThread
