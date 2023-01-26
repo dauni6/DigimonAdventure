@@ -1,16 +1,18 @@
 package com.dontsu.presentation.extensions
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-fun LifecycleOwner.repeatOnStarted(block: suspend CoroutineScope.() -> Unit) {
+fun <T> LifecycleOwner.repeatOnStarted(
+    flow: Flow<T>,
+    block: suspend (result: T) -> Unit
+) {
     lifecycleScope.launch {
         repeatOnLifecycle(Lifecycle.State.STARTED) {
-            block()
+            flow.collect {
+                block(it)
+            }
         }
     }
 }
