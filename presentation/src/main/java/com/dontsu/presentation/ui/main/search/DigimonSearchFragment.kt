@@ -20,12 +20,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, DigimonSearchViewModel>() {
+class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, DigimonSearchViewModel>(FragmentDigimonSearchBinding::inflate) {
 
     override val viewModel: DigimonSearchViewModel by viewModels()
-
-    override fun getViewBinding(): FragmentDigimonSearchBinding =
-        FragmentDigimonSearchBinding.inflate(layoutInflater)
 
     private val digimonSearchListAdapter by lazy {
         DigimonSearchListAdapter { content ->

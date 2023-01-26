@@ -21,11 +21,9 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
+class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(ActivityDetailBinding::inflate) {
 
     override val viewModel: DetailViewModel by viewModels()
-
-    override fun getViewBinding(): ActivityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
 
     override fun initObservers() {
 

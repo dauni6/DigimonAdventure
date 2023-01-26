@@ -21,11 +21,9 @@ import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMainBinding::inflate) {
 
     override val viewModel: MainViewModel by viewModels()
-
-    override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     private val digimonListAdapter: DigimonListAdapter by lazy {
         DigimonListAdapter { content ->

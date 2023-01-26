@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>: Fragment() {
+abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>(
+    private val inflate: Inflate<VB>
+): Fragment() {
 
     private var _binding: VB? = null
     protected val binding get() = _binding!!
-
-    abstract fun getViewBinding(): VB?
 
     abstract val viewModel: VM
 
@@ -22,7 +22,7 @@ abstract class BaseFragment<VB: ViewBinding, VM: ViewModel>: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = getViewBinding()
+        _binding = inflate.invoke(inflater, container, false)
         return binding.root
     }
 
