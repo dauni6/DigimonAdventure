@@ -8,24 +8,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
-import com.dontsu.presentation.extensions.loadWithRes
-import com.dontsu.presentation.extensions.loadWithUrl
-import com.dontsu.presentation.extensions.toGone
-import com.dontsu.presentation.extensions.toVisible
 import com.dontsu.presentation.ui.base.BaseActivity
-import com.dontsu.presentation.util.findResOrNull
 import com.dontsu.domain.model.Digimon
 import com.dontsu.domain.model.Field
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityDetailBinding
+import com.dontsu.presentation.extensions.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -36,37 +28,35 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     override fun getViewBinding(): ActivityDetailBinding = ActivityDetailBinding.inflate(layoutInflater)
 
     override fun initObservers() {
-        lifecycleScope.launch {
-            viewModel.uiState.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect { state ->
-                when(state) {
-                    is UiState.Uninitialized -> {
-                        // do something before loading.
-                        // but it's not used now.
+
+        flowWithStarted(flow = viewModel.uiState) {
+                state ->
+            when(state) {
+                is UiState.Uninitialized -> {
+                    // do something before loading.
+                    // but it's not used now.
+                }
+                is UiState.Loading -> {
+                    binding.progressBar.toVisible()
+                }
+                is UiState.Success -> {
+                    val digimon =  state.successOrNull()
+                    if (digimon != null) {
+                        setDigimon(digimon = digimon)
                     }
-                    is UiState.Loading -> {
-                        binding.progressBar.toVisible()
-                    }
-                    is UiState.Success -> {
-                        val digimon =  state.successOrNull()
-                        if (digimon != null) {
-                            setDigimon(digimon = digimon)
-                        }
-                        binding.progressBar.toGone()
-                    }
-                    is UiState.Error -> {
-                        binding.progressBar.toGone()
-                    }
+                    binding.progressBar.toGone()
+                }
+                is UiState.Error -> {
+                    binding.progressBar.toGone()
                 }
             }
         }
 
-        lifecycleScope.launch {
-            viewModel.isFavorite.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect { isFavorite ->
-                if (isFavorite) {
-                    binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.red, null))
-                } else {
-                    binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.white, null))
-                }
+        flowWithStarted(flow = viewModel.isFavorite) { isFavorite ->
+            if (isFavorite) {
+                binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.red, null))
+            } else {
+                binding.fabLike.setColorFilter(ResourcesCompat.getColor(resources, R.color.white, null))
             }
         }
 
@@ -126,26 +116,26 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
     @SuppressLint("SetTextI18n")
     private fun setDigimon(digimon: Digimon) = with(binding) {
         digimonImageView.loadWithUrl(digimon.image?.first()?.href)
-        digimonIdTextView.text = "Digicode : ${digimon.id.toString().ifEmpty { com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN }}"
-        collapsingToolbarLayout.title = digimon.name.toString().ifEmpty { com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN }
-        digimonNameTextView.text = digimon.name.toString().ifEmpty { com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN }
+        digimonIdTextView.text = "Digicode : ${digimon.id.toString().ifEmpty { DIGIMON_UNKNOWN }}"
+        collapsingToolbarLayout.title = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
+        digimonNameTextView.text = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
         digimon.level?.let {
             levelValueTextView.text = if(it.isEmpty()) {
-                com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN
+                DIGIMON_UNKNOWN
             } else {
                 it.first()?.level.toString()
             }
         }
         digimon.attribute?.let {
             attributeValueTextView.text = if (it.isEmpty()) {
-                com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN
+                DIGIMON_UNKNOWN
             } else {
                 it.first()?.attribute.toString()
             }
         }
         digimon.type?.let {
             typeValueTextview.text = if (it.isEmpty()) {
-                com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_UNKNOWN
+                DIGIMON_UNKNOWN
             } else {
                 it.first()?.type.toString()
             }
@@ -178,7 +168,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>() {
                 description?.language == "en_us"
             }
             descriptionTextView.text = if (description == null) {
-                com.dontsu.presentation.ui.detail.DetailActivity.DIGIMON_NO_DESCRIPTION
+                DIGIMON_NO_DESCRIPTION
             } else {
                 description.description
             }
