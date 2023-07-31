@@ -7,13 +7,13 @@ import com.dontsu.presentation.extensions.toGone
 import com.dontsu.presentation.extensions.toVisible
 import com.dontsu.presentation.ui.base.BaseActivity
 import com.dontsu.presentation.ui.detail.DetailActivity
-import com.dontsu.presentation.ui.main.search.DigimonSearchFragment
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityMainBinding
 import com.dontsu.presentation.extensions.flowWithStarted
 import com.dontsu.presentation.extensions.repeatOnStarted
+import com.dontsu.presentation.ui.search.SearchActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -105,7 +105,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.menu_item_search -> {
-                supportFragmentManager.beginTransaction().add(binding.fragmentContainer.id, DigimonSearchFragment()).commit()
+                val intent = SearchActivity.newInstance(this)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

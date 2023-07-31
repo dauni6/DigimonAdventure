@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <activity
-            android:name="com.dontsu.presentation.ui.detail.DetailActivity"
-            android:exported="false"
-            android:theme="@style/Theme.DigimonAdventure.NoActionBar"/>
-        <activity
             android:name="com.dontsu.presentation.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -14,5 +10,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.dontsu.presentation.ui.detail.DetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DigimonAdventure.NoActionBar"/>
+        <activity
+            android:name="com.dontsu.presentation.ui.search.SearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.DigimonAdventure"/>
     </application>
 </manifest>

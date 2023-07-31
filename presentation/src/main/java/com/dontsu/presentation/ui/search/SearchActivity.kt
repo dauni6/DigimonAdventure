@@ -1,44 +1,52 @@
-package com.dontsu.presentation.ui.main.search
+package com.dontsu.presentation.ui.search
 
+import android.content.Context
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
 import com.dontsu.presentation.extensions.toGone
 import com.dontsu.presentation.extensions.toVisible
-import com.dontsu.presentation.ui.base.BaseFragment
 import com.dontsu.presentation.ui.detail.DetailActivity
 import com.dontsu.presentation.ui.main.DigimonAdapterItemDecoration
 import com.dontsu.domain.model.UiState
 import com.dontsu.presentation.R
-import com.dontsu.presentation.databinding.FragmentDigimonSearchBinding
+import com.dontsu.presentation.databinding.ActivitySearchBinding
 import com.dontsu.presentation.extensions.repeatOnStarted
+import com.dontsu.presentation.extensions.setNavigationIconColor
+import com.dontsu.presentation.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, DigimonSearchViewModel>(FragmentDigimonSearchBinding::inflate) {
+class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(ActivitySearchBinding::inflate) {
 
-    override val viewModel: DigimonSearchViewModel by viewModels()
+    override val viewModel: SearchViewModel by viewModels()
 
-    private val digimonSearchListAdapter by lazy {
-        DigimonSearchListAdapter { content ->
-            startActivity(DetailActivity.newInstance(context = requireContext(), id = content.id))
+    private val searchListAdapter by lazy {
+        SearchListAdapter { content ->
+            startActivity(DetailActivity.newInstance(context = this, id = content.id))
         }
     }
 
     override fun initViews(): Unit = with(binding) {
+        setSupportActionBar(binding.toolbar)
         toolbar.apply {
-            inflateMenu(R.menu.menu_search)
-            setOnMenuItemClickListener {
-                it.itemId == R.id.menu_item_refresh
+            setNavigationIconColor(ResourcesCompat.getColor(resources, R.color.white, null))
+            setNavigationOnClickListener {
+                finish()
             }
         }
 
         searchView.apply {
+            setIconifiedByDefault(false)
             setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String): Boolean {
                     viewModel.searchDigimon(query.trim())
@@ -51,7 +59,7 @@ class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, Digimon
         }
 
         recyclerView.apply {
-            adapter = digimonSearchListAdapter
+            adapter = searchListAdapter
             addItemDecoration(DigimonAdapterItemDecoration())
         }
     }
@@ -71,9 +79,9 @@ class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, Digimon
                 is UiState.Success -> {
                     val list = state.data.content
                     if (!list.isNullOrEmpty()) {
-                        digimonSearchListAdapter.submitList(list)
+                        searchListAdapter.submitList(list)
                     }
-                    digimonSearchListAdapter.submitList(list)
+                    searchListAdapter.submitList(list)
                     binding.progressBar.toGone()
                 }
                 is UiState.Error -> {
@@ -90,11 +98,33 @@ class DigimonSearchFragment : BaseFragment<FragmentDigimonSearchBinding, Digimon
     }
 
     private fun showKeyboard(view: View) {
-        WindowCompat.getInsetsController(requireActivity().window, view).show(WindowInsetsCompat.Type.ime())
+        WindowCompat.getInsetsController(window, view).show(WindowInsetsCompat.Type.ime())
     }
 
     private fun dismissKeyboard(view: View) {
-        WindowCompat.getInsetsController(requireActivity().window, view).hide(WindowInsetsCompat.Type.ime())
+        WindowCompat.getInsetsController(window, view).hide(WindowInsetsCompat.Type.ime())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_item_search -> {
+               binding.searchView.performClick()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+
+        fun newInstance(context: Context): Intent {
+            return Intent(context, SearchActivity::class.java)
+        }
+
     }
 
 }

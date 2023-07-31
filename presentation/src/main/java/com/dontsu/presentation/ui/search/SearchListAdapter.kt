@@ -1,4 +1,4 @@
-package com.dontsu.presentation.ui.main.search
+package com.dontsu.presentation.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,9 +9,9 @@ import com.dontsu.presentation.extensions.loadWithName
 import com.dontsu.domain.model.Content
 import com.dontsu.presentation.databinding.ItemMainDigimonBinding
 
-class DigimonSearchListAdapter(
+class SearchListAdapter(
     private val itemClicked: (Content) -> Unit
-): ListAdapter<Content, DigimonSearchListAdapter.DigimonSearchContentViewHolder>(diffCallback) {
+): ListAdapter<Content, SearchListAdapter.DigimonSearchContentViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DigimonSearchContentViewHolder {
         val inflater = LayoutInflater.from(parent.context)

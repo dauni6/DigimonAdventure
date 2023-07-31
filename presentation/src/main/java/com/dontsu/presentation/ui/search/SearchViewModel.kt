@@ -1,4 +1,4 @@
-package com.dontsu.presentation.ui.main.search
+package com.dontsu.presentation.ui.search
 
 import androidx.lifecycle.viewModelScope
 import com.dontsu.presentation.ui.base.BaseViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DigimonSearchViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val searchUseCase: GetDigimonSearchUseCase
 ): BaseViewModel() {
 
