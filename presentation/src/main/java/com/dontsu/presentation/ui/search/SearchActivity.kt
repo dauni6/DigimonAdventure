@@ -10,19 +10,17 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
-import com.dontsu.presentation.extensions.toGone
-import com.dontsu.presentation.extensions.toVisible
 import com.dontsu.presentation.ui.detail.DetailActivity
 import com.dontsu.presentation.ui.main.DigimonAdapterItemDecoration
 import com.dontsu.domain.model.UiState
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivitySearchBinding
-import com.dontsu.presentation.extensions.repeatOnStarted
-import com.dontsu.presentation.extensions.setNavigationIconColor
+import com.dontsu.presentation.extensions.*
 import com.dontsu.presentation.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -64,7 +62,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(Acti
         }
     }
 
-    override fun initObservers() {
+    override fun initObservers() = with(binding) {
         // for search digimon list
         // Note: we have to use `repeatOnLifecycle` to avoid wasting resources when the app is in the background.
         // because when we use a coroutine which is created in the `lifecycle.launch`, even if the app goes in the background,
@@ -74,19 +72,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>(Acti
         // and if you collect single flow, then you can use `flowWithLifecycle`.
         repeatOnStarted(flow = viewModel.digimonUiState) { state ->
             when (state) {
-                is UiState.Uninitialized -> binding.progressBar.toGone()
-                is UiState.Loading -> binding.progressBar.toVisible()
+                is UiState.Uninitialized -> progressBar.toGone()
+                is UiState.Loading -> progressBar.toVisible()
                 is UiState.Success -> {
                     val list = state.data.content
-                    if (!list.isNullOrEmpty()) {
-                        searchListAdapter.submitList(list)
+                    if (list.isNullOrEmpty()) {
+                        tvSearchNoResult.toVisible()
+                        recyclerView.toInvisible()
+                    } else {
+                        tvSearchNoResult.toInvisible()
+                        recyclerView.toVisible()
                     }
                     searchListAdapter.submitList(list)
-                    binding.progressBar.toGone()
+                    progressBar.toGone()
                 }
                 is UiState.Error -> {
-                    Snackbar.make(binding.root, "error", Snackbar.LENGTH_SHORT).show()
-                    binding.progressBar.toGone()
+                    val message = if(state.error is UnknownHostException) {
+                        getString(R.string.check_network_connectivity)
+                    } else {
+                        state.error.toString()
+                    }
+                    Snackbar.make(root, message, Snackbar.LENGTH_SHORT).show()
+                    progressBar.toGone()
                 }
             }
         }
