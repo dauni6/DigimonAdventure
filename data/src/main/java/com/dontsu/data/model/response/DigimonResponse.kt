@@ -1,36 +1,38 @@
 package com.dontsu.data.model.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 import javax.annotation.concurrent.Immutable
 
+@OptIn(ExperimentalSerializationApi::class)
 @Immutable
-@JsonClass(generateAdapter = true)
+@Serializable
 data class DigimonResponse(
-    @field:Json(name = "attributes")
+    @JsonNames("attributes")
     val attribute: List<AttributeResponse?>?,
-    @field:Json(name = "descriptions")
+    @JsonNames("descriptions")
     val description: List<DescriptionResponse?>?,
-    @field:Json(name = "fields")
+    @JsonNames("fields")
     val field: List<FieldResponse?>?,
-    @field:Json(name = "id")
+    @JsonNames("id")
     val id: Int?,
-    @field:Json(name = "images")
+    @JsonNames("images")
     val image: List<ImageResponse?>?,
-    @field:Json(name = "levels")
+    @JsonNames("levels")
     val level: List<LevelResponse?>?,
-    @field:Json(name = "name")
+    @JsonNames("name")
     val name: String?,
-    @field:Json(name = "nextEvolutions")
+    @JsonNames("nextEvolutions")
     val nextEvolution: List<NextEvolutionResponse?>?,
-    @field:Json(name = "priorEvolutions")
+    @JsonNames("priorEvolutions")
     val priorEvolution: List<PriorEvolutionResponse?>?,
-    @field:Json(name = "releaseDate")
+    @JsonNames("releaseDate")
     val releaseDate: String?,
-    @field:Json(name = "skills")
+    @JsonNames("skills")
     val skills: List<SkillResponse?>?,
-    @field:Json(name = "types")
+    @JsonNames("types")
     val type: List<TypeResponse?>?,
-    @field:Json(name = "xAntibody")
+    @JsonNames("xAntibody")
     val xAntibody: Boolean?
 )

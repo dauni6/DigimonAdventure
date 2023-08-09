@@ -7,17 +7,23 @@ import com.dontsu.domain.model.PriorEvolution
 fun PriorEvolutionEntity.toPriorEvolution(): PriorEvolution = PriorEvolution(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )
 
 fun PriorEvolutionResponse.toPriorEvolution(): PriorEvolution = PriorEvolution(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )
 
 fun PriorEvolution.toPriorEvolutionEntity(): PriorEvolutionEntity = PriorEvolutionEntity(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )

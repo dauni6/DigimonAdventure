@@ -6,5 +6,6 @@ package com.dontsu.domain.model
 data class Content(
     val href: String?,
     val id: Int?,
-    val name: String?
+    val name: String?,
+    val image: String?
 )

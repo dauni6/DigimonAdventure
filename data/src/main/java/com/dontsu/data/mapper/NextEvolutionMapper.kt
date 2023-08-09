@@ -7,17 +7,23 @@ import com.dontsu.domain.model.NextEvolution
 fun NextEvolutionEntity.toNextEvolution(): NextEvolution = NextEvolution(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )
 
 fun NextEvolutionResponse.toNextEvolution(): NextEvolution = NextEvolution(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )
 
 fun NextEvolution.toNextEvolutionEntity(): NextEvolutionEntity = NextEvolutionEntity(
     condition = condition,
     digimon = digimon,
-    id = id
+    id = id,
+    image = image,
+    url = url
 )

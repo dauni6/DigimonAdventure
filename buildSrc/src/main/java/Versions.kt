@@ -12,7 +12,7 @@ object Versions {
     const val room = "2.5.2"
     const val glide = "4.12.0"
     const val retrofit = "2.9.0"
-    const val moshi = "1.15.0"
+    const val retrofit_serialization_converter = "1.0.0"
     const val timber = "5.0.1"
     const val swiperefreshlayout = "1.1.0"
     const val javax_inject = "1"
@@ -21,4 +21,6 @@ object Versions {
     const val junit = "4.13.2"
     const val ext_junit = "1.1.4"
     const val espresso_core = "3.5.0"
+    const val kotlinx_serialization_json = "1.4.1"
+    const val kotlin_serialization = "1.6.10"
 }

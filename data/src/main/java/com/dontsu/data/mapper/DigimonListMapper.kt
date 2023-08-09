@@ -21,7 +21,8 @@ fun DigimonList.toEntity(): DigimonListEntity = DigimonListEntity(
         ContentEntity(
             id = it?.id,
             href = it?.href,
-            name = it?.name
+            name = it?.name,
+            image = it?.image
         )
     },
     pageable = PageableEntity(

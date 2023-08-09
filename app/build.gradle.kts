@@ -58,11 +58,9 @@ dependencies {
 
     // Retrofit
     implementation(Dependencies.Network.retrofit)
-    implementation(Dependencies.Network.retrofit_converter_moshi)
+    implementation(Dependencies.Network.retrofit_serialization_converter)
 
-    // Moshi
-    implementation(Dependencies.Network.moshi)
-    kapt(Dependencies.Network.moshi_compiler)
+    implementation(Dependencies.Serialization.kotlinx_serialization_json)
 
     // Logging
     implementation(Dependencies.Logging.timber)

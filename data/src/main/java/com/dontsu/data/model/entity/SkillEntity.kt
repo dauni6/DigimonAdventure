@@ -1,5 +1,8 @@
 package com.dontsu.data.model.entity
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class SkillEntity(
     val description: String?,
     val id: Int?,

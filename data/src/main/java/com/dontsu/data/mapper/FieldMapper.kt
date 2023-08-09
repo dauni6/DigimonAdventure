@@ -6,15 +6,18 @@ import com.dontsu.domain.model.Field
 
 fun FieldEntity.toField(): Field = Field(
     field = field,
-    id = id
+    id = id,
+    image = image
 )
 
 fun FieldResponse.toField(): Field = Field(
     field = field,
-    id = id
+    id = id,
+    image = image
 )
 
 fun Field.toFieldEntity(): FieldEntity = FieldEntity(
     field = field,
-    id = id
+    id = id,
+    image = image
 )
