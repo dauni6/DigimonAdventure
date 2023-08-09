@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         classpath (Dependencies.GradlePlugin.kotlin)
         classpath (Dependencies.GradlePlugin.hilt)
+        classpath (Dependencies.GradlePlugin.kotlin_serialization)
     }
 }
 

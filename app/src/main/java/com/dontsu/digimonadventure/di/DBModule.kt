@@ -3,8 +3,6 @@ package com.dontsu.digimonadventure.di
 import android.content.Context
 import androidx.room.Room
 import com.dontsu.data.db.*
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,12 +13,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DBModule {
-
-    @Provides
-    @Singleton
-    fun provideMoshi(): Moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
 
     @Provides
     @Singleton
@@ -57,40 +49,38 @@ object DBModule {
 
     @Provides
     @Singleton
-    fun provideAttributeListTypeConverter(moshi: Moshi): AttributeListTypeConverter = AttributeListTypeConverter(moshi)
+    fun provideAttributeListTypeConverter(): AttributeListTypeConverter = AttributeListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideDescriptionListTypeConverter(moshi: Moshi): DescriptionListTypeConverter = DescriptionListTypeConverter(moshi)
+    fun provideDescriptionListTypeConverter(): DescriptionListTypeConverter = DescriptionListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideFieldListTypeConverter(moshi: Moshi): FieldListTypeConverter = FieldListTypeConverter(moshi)
+    fun provideFieldListTypeConverter(): FieldListTypeConverter = FieldListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideImageListTypeConverter(moshi: Moshi): ImageListTypeConverter = ImageListTypeConverter(moshi)
+    fun provideImageListTypeConverter(): ImageListTypeConverter = ImageListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideLevelListTypeConverter(moshi: Moshi): LevelListTypeConverter = LevelListTypeConverter(moshi)
+    fun provideLevelListTypeConverter(): LevelListTypeConverter = LevelListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideNextEvolutionListTypeConverter(moshi: Moshi): NextEvolutionListTypeConverter =
-        NextEvolutionListTypeConverter(moshi)
+    fun provideNextEvolutionListTypeConverter(): NextEvolutionListTypeConverter = NextEvolutionListTypeConverter()
 
     @Provides
     @Singleton
-    fun providePriorEvolutionListTypeConverter(moshi: Moshi): PriorEvolutionListTypeConverter =
-        PriorEvolutionListTypeConverter(moshi)
+    fun providePriorEvolutionListTypeConverter(): PriorEvolutionListTypeConverter = PriorEvolutionListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideSkillListListTypeConverter(moshi: Moshi): SkillListTypeConverter = SkillListTypeConverter(moshi)
+    fun provideSkillListListTypeConverter(): SkillListTypeConverter = SkillListTypeConverter()
 
     @Provides
     @Singleton
-    fun provideTypeListTypeConver(moshi: Moshi): TypeListTypeConverter = TypeListTypeConverter(moshi)
+    fun provideTypeListTypeConverter(): TypeListTypeConverter = TypeListTypeConverter()
 
 }

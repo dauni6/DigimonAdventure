@@ -16,6 +16,7 @@ import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityDetailBinding
 import com.dontsu.presentation.extensions.*
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -45,6 +46,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(Acti
                     binding.progressBar.toGone()
                 }
                 is UiState.Error -> {
+                    Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
                     binding.progressBar.toGone()
                 }
             }

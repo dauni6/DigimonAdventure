@@ -1,19 +1,24 @@
 package com.dontsu.data.model.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 import javax.annotation.concurrent.Immutable
 
 /**
  * Used for getting Digimon list.
  * */
+
+@OptIn(ExperimentalSerializationApi::class)
 @Immutable
-@JsonClass(generateAdapter = true)
+@Serializable
 data class ContentResponse(
-    @field:Json(name = "href")
+    @JsonNames("href")
     val href: String?,
-    @field:Json(name = "id")
+    @JsonNames("id")
     val id: Int?,
-    @field:Json(name = "name")
-    val name: String?
+    @JsonNames("name")
+    val name: String?,
+    @JsonNames("image")
+    val image: String?
 )

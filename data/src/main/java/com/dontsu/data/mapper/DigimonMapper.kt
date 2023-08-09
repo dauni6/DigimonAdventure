@@ -53,7 +53,8 @@ fun Digimon.toDigimonEntity(): DigimonEntity = DigimonEntity(
     field = field?.map {
         FieldEntity(
             field = it?.field,
-            id = it?.id
+            id = it?.id,
+            image = it?.image
         )
     },
     id = id,
@@ -74,14 +75,18 @@ fun Digimon.toDigimonEntity(): DigimonEntity = DigimonEntity(
         NextEvolutionEntity(
             condition = it?.condition,
             digimon = it?.digimon,
-            id = it?.id
+            id = it?.id,
+            image = it?.image,
+            url = it?.url
         )
     },
     priorEvolution = priorEvolution?.map {
         PriorEvolutionEntity(
             condition = it?.condition,
             digimon = it?.digimon,
-            id = it?.id
+            id = it?.id,
+            image = it?.image,
+            url = it?.url
         )
     },
     releaseDate = releaseDate,

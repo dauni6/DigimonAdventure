@@ -22,6 +22,7 @@ object Dependencies {
         //        const val android = "com.android.tools.build:gradle:${Versions.gradle}"
         const val kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         const val hilt = "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}"
+        const val kotlin_serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin_serialization}"
     }
 
     object Lifecycle {
@@ -43,11 +44,7 @@ object Dependencies {
     object Network {
         // Retrofit
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val retrofit_converter_moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-
-        // Moshi
-        const val moshi = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
-        const val moshi_compiler = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+        const val retrofit_serialization_converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofit_serialization_converter}"
     }
 
     object Glide {
@@ -72,6 +69,10 @@ object Dependencies {
         const val junit = "junit:junit:${Versions.junit}"
         const val ext_junit = "androidx.test.ext:junit:${Versions.ext_junit}"
         const val espresso_core = "androidx.test.espresso:espresso-core:${Versions.espresso_core}"
+    }
+
+    object Serialization {
+        const val kotlinx_serialization_json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinx_serialization_json}"
     }
 
 }

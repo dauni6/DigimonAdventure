@@ -1,16 +1,22 @@
 package com.dontsu.data.model.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 import javax.annotation.concurrent.Immutable
 
+@OptIn(ExperimentalSerializationApi::class)
 @Immutable
-@JsonClass(generateAdapter = true)
+@Serializable
 data class NextEvolutionResponse(
-    @field:Json(name = "condition")
+    @JsonNames("condition")
     val condition: String?,
-    @field:Json(name = "digimon")
+    @JsonNames("digimon")
     val digimon: String?,
-    @field:Json(name = "id")
-    val id: Int?
+    @JsonNames("id")
+    val id: Int?,
+    @JsonNames("image")
+    val image: String?,
+    @JsonNames("url")
+    val url: String?
 )

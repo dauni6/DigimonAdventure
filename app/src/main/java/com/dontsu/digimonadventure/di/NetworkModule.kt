@@ -3,13 +3,15 @@ package com.dontsu.digimonadventure.di
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.data.network.DigimonLoggingInterceptor
 import com.dontsu.data.util.Url.DIGIMON_BASE_URL
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -23,7 +25,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(DIGIMON_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(Json.asConverterFactory(MediaType.parse("application/json")!!))
             .build()
     }
 

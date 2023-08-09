@@ -59,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
                     binding.progressBar.toGone()
                 }
                 is UiState.Error -> {
-                    Snackbar.make(binding.root, "error", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
                     binding.progressBar.toGone()
                 }
             }

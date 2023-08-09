@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
+    kotlin("plugin.serialization")
     id("dagger.hilt.android.plugin")
 }
 
@@ -27,7 +28,7 @@ dependencies {
     // module
     implementation(project(":domain"))
 
-    implementation(Dependencies.Kotlin.core_ktx)
+    implementation(Dependencies.Serialization.kotlinx_serialization_json)
 
     // Coroutine
     implementation(Dependencies.Coroutine.core)
@@ -46,11 +47,7 @@ dependencies {
 
     // Retrofit
     implementation(Dependencies.Network.retrofit)
-    implementation(Dependencies.Network.retrofit_converter_moshi)
-
-    // Moshi
-    implementation(Dependencies.Network.moshi)
-    kapt(Dependencies.Network.moshi_compiler)
+    implementation(Dependencies.Network.retrofit_serialization_converter)
 
     // Testing
     testImplementation(Dependencies.Test.junit)
