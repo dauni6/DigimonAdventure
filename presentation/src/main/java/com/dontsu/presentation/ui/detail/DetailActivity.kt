@@ -151,15 +151,15 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(Acti
                 }
 
                 fields.forEach { fieldOrNull ->
-                    com.dontsu.presentation.util.findResOrNull(fieldOrNull?.id)?.let { res ->
+                    fieldOrNull?.let { field ->
                         val fieldImageView = AppCompatImageView(this@DetailActivity)
                         fieldImageView.layoutParams = layoutParams
-                        fieldImageView.loadWithRes(res)
-                        binding.fieldLinearLayout.addView(fieldImageView)
+                        fieldImageView.loadWithUrl(field.image)
+                        fieldLinearLayout.addView(fieldImageView)
                     }
                 }
             } else {
-                binding.noFieldTextView.toVisible()
+                noFieldTextView.toVisible()
             }
         }
 
