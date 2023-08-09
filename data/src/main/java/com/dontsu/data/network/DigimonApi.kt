@@ -13,6 +13,9 @@ interface DigimonApi {
     suspend fun getDigimonList(@Query("pageSize") pageSize: Int = 100): Response<DigimonListResponse>
 
     @GET("api/v1/digimon")
+    suspend fun getDigimonList(@Query("page") page: Int = 0, @Query("pageSize") pageSize: Int = 20): Response<DigimonListResponse>
+
+    @GET("api/v1/digimon")
     suspend fun searchDigimon(@Query("name") name: String): Response<DigimonListResponse>
 
     @GET("api/v1/digimon/{id}")

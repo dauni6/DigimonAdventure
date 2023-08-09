@@ -3,6 +3,7 @@ package com.dontsu.digimonadventure.di
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.data.repository.detail.remote.DigimonDetailRemoteDataSourceImpl
 import com.dontsu.data.repository.list.remote.DigimonListRemoteDataSourceImpl
+import com.dontsu.data.repository.list.remote.DigimonListRemotePagingSource
 import com.dontsu.data.repository.search.remote.DigimonSearchRemoteDataSourceImpl
 import com.dontsu.domain.repository.detail.remote.DigimonDetailRemoteDataSource
 import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
@@ -43,6 +44,18 @@ object RemoteDataSourceModule {
         @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonDetailRemoteDataSource {
         return DigimonDetailRemoteDataSourceImpl(
+            api = digimonApi,
+            ioDispatcher = ioDispatcher
+        )
+    }
+
+    @Provides
+    @Singletona
+    fun provideDigimonListRemotePagingSource(
+        digimonApi: DigimonApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
+    ): DigimonListRemotePagingSource {
+        return DigimonListRemotePagingSource(
             api = digimonApi,
             ioDispatcher = ioDispatcher
         )
