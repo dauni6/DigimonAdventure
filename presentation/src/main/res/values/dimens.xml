@@ -7,8 +7,27 @@
     <dimen name="fab_bottom_padding">72dp</dimen>
     <dimen name="description_min_height">555dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="list_degimon_height">200dp</dimen>
+    <dimen name="list_digimon_height">200dp</dimen>
     <dimen name="toolbar_elevation">5dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_radius">8dp</dimen>
+
+    <!-- Text -->
+    <dimen name="text12">12sp</dimen>
+    <dimen name="text14">14sp</dimen>
+    <dimen name="text16">16sp</dimen>
+    <dimen name="text18">18sp</dimen>
+    <dimen name="text20">20sp</dimen>
+    <dimen name="text22">22sp</dimen>
+    <dimen name="text24">24sp</dimen>
+    <dimen name="text26">26sp</dimen>
+    <dimen name="text28">28sp</dimen>
+    <dimen name="text30">30sp</dimen>
+    <dimen name="text32">32sp</dimen>
+    <dimen name="text34">34sp</dimen>
+    <dimen name="text36">36sp</dimen>
+    <dimen name="text38">38sp</dimen>
+    <dimen name="text40">40sp</dimen>
+    <dimen name="text42">42sp</dimen>
+
 </resources>

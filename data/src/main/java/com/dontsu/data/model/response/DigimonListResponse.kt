@@ -9,6 +9,6 @@ import javax.annotation.concurrent.Immutable
 @Immutable
 @Serializable
 data class DigimonListResponse(
-    val content: List<ContentResponse?>?,
+    val content: List<ContentResponse?>? = null,
     val pageable: PageableResponse? // Not used in this project.
 )

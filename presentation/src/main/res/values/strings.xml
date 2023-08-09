@@ -10,6 +10,6 @@
     <string name="fields">Fields</string>
     <string name="like_floating_button_content_description">like floating button</string>
     <string name="no_available_fields">No available fields.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_search_results_found">No search results found.</string>
+    <string name="check_network_connectivity">Please check your network connectivity status.</string>
 </resources>
