@@ -75,4 +75,9 @@ object Dependencies {
         const val kotlinx_serialization_json = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinx_serialization_json}"
     }
 
+    object Paging3 {
+        const val paging3 = "androidx.paging:paging-runtime:${Versions.paging3}"
+        const val paging3_common =  "androidx.paging:paging-common:${Versions.paging3}"
+    }
+
 }

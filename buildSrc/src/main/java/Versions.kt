@@ -23,4 +23,5 @@ object Versions {
     const val espresso_core = "3.5.0"
     const val kotlinx_serialization_json = "1.4.1"
     const val kotlin_serialization = "1.6.10"
+    const val paging3 = "3.1.1"
 }
