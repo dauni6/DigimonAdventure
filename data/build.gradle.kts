@@ -49,6 +49,9 @@ dependencies {
     implementation(Dependencies.Network.retrofit)
     implementation(Dependencies.Network.retrofit_serialization_converter)
 
+    // Paging3
+    implementation(Dependencies.Paging3.paging3)
+
     // Testing
     testImplementation(Dependencies.Test.junit)
     androidTestImplementation(Dependencies.Test.ext_junit)

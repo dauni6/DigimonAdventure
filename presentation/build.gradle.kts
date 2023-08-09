@@ -68,6 +68,9 @@ dependencies {
     implementation(Dependencies.Glide.glide)
     kapt(Dependencies.Glide.glide_compiler)
 
+    // Paging3
+    implementation(Dependencies.Paging3.paging3)
+
     // Logging
     implementation(Dependencies.Logging.timber)
 

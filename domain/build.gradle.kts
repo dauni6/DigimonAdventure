@@ -16,5 +16,8 @@ dependencies {
     implementation(Dependencies.Coroutine.core)
     implementation(Dependencies.Coroutine.android)
 
+    // Paging3
+    implementation(Dependencies.Paging3.paging3_common)
+
     implementation(Dependencies.Javax.inject)
 }
