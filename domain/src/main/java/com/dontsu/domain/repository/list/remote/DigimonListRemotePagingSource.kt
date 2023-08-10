@@ -1,3 +1,0 @@
-package com.dontsu.domain.repository.list.remote
-
-interface DigimonListRemotePagingSource

@@ -2,6 +2,7 @@ package com.dontsu.digimonadventure.di
 
 import com.dontsu.data.repository.detail.DigimonDetailRepositoryImpl
 import com.dontsu.data.repository.list.DigimonListRepositoryImpl
+import com.dontsu.data.repository.list.remote.DigimonListRemotePagingSource
 import com.dontsu.data.repository.search.DigimonSearchRepositoryImpl
 import com.dontsu.domain.repository.detail.DigimonDetailRepository
 import com.dontsu.domain.repository.detail.local.DigimonDetailLocalDataSource
@@ -27,11 +28,13 @@ object RepositoryModule {
     @Singleton
     fun provideDigimonListRepository(
         remoteDataSource: DigimonListRemoteDataSource,
-        localDataSource: DigimonListLocalDataSource
+        localDataSource: DigimonListLocalDataSource,
+        remotePagingSource: DigimonListRemotePagingSource
     ): DigimonListRepository {
         return DigimonListRepositoryImpl(
             remoteDataSource = remoteDataSource,
-            localDataSource = localDataSource
+            localDataSource = localDataSource,
+            remotePagingSource = remotePagingSource
         )
     }
 

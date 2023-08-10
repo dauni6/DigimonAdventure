@@ -30,4 +30,12 @@
     <dimen name="text40">40sp</dimen>
     <dimen name="text42">42sp</dimen>
 
+    <!-- Radius -->
+    <dimen name="radius06">6dp</dimen>
+    <dimen name="radius08">8dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin08">8dp</dimen>
+    <dimen name="padding04">4dp</dimen>
+
 </resources>

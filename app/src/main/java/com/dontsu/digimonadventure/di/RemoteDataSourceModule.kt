@@ -50,7 +50,6 @@ object RemoteDataSourceModule {
     }
 
     @Provides
-    @Singletona
     fun provideDigimonListRemotePagingSource(
         digimonApi: DigimonApi,
         @IoDispatcher ioDispatcher: CoroutineDispatcher

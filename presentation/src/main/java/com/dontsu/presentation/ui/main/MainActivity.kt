@@ -3,21 +3,17 @@ package com.dontsu.presentation.ui.main
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import com.dontsu.presentation.extensions.toGone
-import com.dontsu.presentation.extensions.toVisible
 import com.dontsu.presentation.ui.base.BaseActivity
 import com.dontsu.presentation.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityMainBinding
-import com.dontsu.presentation.extensions.flowWithStarted
-import com.dontsu.presentation.extensions.repeatOnStarted
+import com.dontsu.presentation.extensions.*
 import com.dontsu.presentation.ui.search.SearchActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import timber.log.Timber
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -25,9 +21,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
 
     override val viewModel: MainViewModel by viewModels()
 
-    private val digimonListAdapter: DigimonListAdapter by lazy {
-        DigimonListAdapter { content ->
-            startActivity(DetailActivity.newInstance(context = this, id = content.id))
+    private val digimonListPagingDataAdapter: DigimonListPagingDataAdapter by lazy {
+        DigimonListPagingDataAdapter { content ->
+            startActivity(DetailActivity.newInstance(context = this, id = content?.id))
         }
     }
 
@@ -39,35 +35,34 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
         // So, `repeatOnLifecycle` automatically cancels the ongoing coroutine for us when the lifecycle falls below the state(e.g, Lifecycle.State.STARTED).
         // and then resume or recreate the coroutine for us.
         // and if you collect single flow, then you can use `flowWithLifecycle`.
-        repeatOnStarted(flow = viewModel.listUiState) { state ->
-            when(state) {
-                is UiState.Uninitialized -> {
-                    // do something before loading.
-                    // but it's not used now.
-                }
-                is UiState.Loading -> {
-                    binding.progressBar.toVisible()
-                }
-                is UiState.Success -> {
-                    val list = state.successOrNull()?.content
-                    list?.forEach {
-                        Timber.d("view - ${it?.name}")
+        repeatOnStarted(flow = viewModel.pagingListStateFlow) { state ->
+            with(binding) {
+                when(state) {
+                    is UiState.Uninitialized -> {
+                        // do something before loading.
+                        // but it's not used now.
                     }
-                    if (!list.isNullOrEmpty()) {
-                        digimonListAdapter.submitList(list)
+                    is UiState.Loading -> {
+                        progressBar.toVisible()
                     }
-                    binding.progressBar.toGone()
-                }
-                is UiState.Error -> {
-                    Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
-                    binding.progressBar.toGone()
+                    is UiState.Success -> {
+                        progressBar.toGone()
+                        val pagingData = state.successOrNull()
+                        if (pagingData != null) {
+                            digimonListPagingDataAdapter.submitData(pagingData)
+                        }
+                    }
+                    is UiState.Error -> {
+                        Snackbar.make(binding.root, state.error.toString(), Snackbar.LENGTH_SHORT).show()
+                        progressBar.toGone()
+                    }
                 }
             }
         }
 
         // for digimon list refreshing
         flowWithStarted(flow = viewModel.refresh) { state ->
-            when(state) {
+            when (state) {
                 is UiState.Uninitialized -> Unit // nothing to do
                 is UiState.Loading -> {
                     binding.swiperefresh.isRefreshing = true
@@ -86,14 +81,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
         setSupportActionBar(binding.toolbar)
 
         binding.recyclerView.apply {
-            adapter = digimonListAdapter
+            setHasFixedSize(true)
+            adapter = digimonListPagingDataAdapter.withLoadStateFooter(DigimonLoadingStateAdapter {
+                digimonListPagingDataAdapter.retry()
+            })
             addItemDecoration(DigimonAdapterItemDecoration())
         }
     }
 
     override fun initListeners() = with(binding) {
         swiperefresh.setOnRefreshListener {
-            viewModel.refreshDigimonList()
+            digimonListPagingDataAdapter.refresh()
         }
     }
 
@@ -103,7 +101,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.menu_item_search -> {
                 val intent = SearchActivity.newInstance(this)
                 startActivity(intent)

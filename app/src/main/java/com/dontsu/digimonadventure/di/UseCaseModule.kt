@@ -3,6 +3,8 @@ package com.dontsu.digimonadventure.di
 import com.dontsu.domain.usecase.detail.*
 import com.dontsu.domain.usecase.list.GetDigimonListUseCase
 import com.dontsu.domain.usecase.list.GetDigimonListUseCaseImpl
+import com.dontsu.domain.usecase.list.GetDigimonPagingListUseCase
+import com.dontsu.domain.usecase.list.GetDigimonPagingListUseCaseImpl
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCase
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCaseImpl
 import dagger.Binds
@@ -20,6 +22,12 @@ abstract class UseCaseModule {
     abstract fun bindGetDigimonListUseCase(
         getDigimonListUseCaseImpl: GetDigimonListUseCaseImpl
     ): GetDigimonListUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindGetDigimonPagingListUseCase(
+        getDigimonPagingListUseCaseImpl: GetDigimonPagingListUseCaseImpl
+    ): GetDigimonPagingListUseCase
 
     @Binds
     @ViewModelScoped
