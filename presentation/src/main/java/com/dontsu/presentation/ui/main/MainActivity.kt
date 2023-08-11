@@ -9,7 +9,7 @@ import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityMainBinding
-import com.dontsu.presentation.extensions.*
+import com.dontsu.presentation.extension.*
 import com.dontsu.presentation.ui.search.SearchActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,6 +91,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
 
     override fun initListeners() = with(binding) {
         swiperefresh.setOnRefreshListener {
+            viewModel.refreshDigimonList()
             digimonListPagingDataAdapter.refresh()
         }
     }

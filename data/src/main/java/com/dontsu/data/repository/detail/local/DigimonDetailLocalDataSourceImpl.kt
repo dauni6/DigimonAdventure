@@ -2,7 +2,7 @@ package com.dontsu.data.repository.detail.local
 
 import androidx.annotation.WorkerThread
 import com.dontsu.data.db.DigimonDao
-import com.dontsu.data.exceptions.EmptyLocalDataException
+import com.dontsu.data.exception.EmptyLocalDataException
 import com.dontsu.data.mapper.toDigimon
 import com.dontsu.data.mapper.toDigimonEntity
 import com.dontsu.data.mapper.toFavorite

@@ -15,7 +15,7 @@ import com.dontsu.presentation.ui.main.DigimonAdapterItemDecoration
 import com.dontsu.domain.model.UiState
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivitySearchBinding
-import com.dontsu.presentation.extensions.*
+import com.dontsu.presentation.extension.*
 import com.dontsu.presentation.ui.base.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

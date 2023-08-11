@@ -1,8 +1,6 @@
 package com.dontsu.presentation.ui.main
 
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dontsu.domain.model.Content
@@ -17,17 +15,10 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val pagingListUseCase: GetDigimonPagingListUseCase
+    pagingListUseCase: GetDigimonPagingListUseCase
 ) : BaseViewModel() {
 
-    val pagingListStateFlow: StateFlow<UiState<PagingData<Content>>> = Pager(
-        config = PagingConfig(
-            pageSize = DEFAULT_PAGE_SIZE,
-            enablePlaceholders = false
-        )
-    ) {
-        pagingListUseCase.invoke()
-    }.flow
+    val pagingListStateFlow: StateFlow<UiState<PagingData<Content>>> = pagingListUseCase.invoke()
     .cachedIn(viewModelScope)
     .mapLatest {
         UiState.Success(it)
@@ -41,16 +32,9 @@ class MainViewModel @Inject constructor(
     private val _refresh: MutableStateFlow<UiState<Boolean>> = MutableStateFlow(UiState.Uninitialized)
     val refresh: StateFlow<UiState<Boolean>> = _refresh.asStateFlow()
 
-/*    fun refreshDigimonList() {
-        itemSize = Random.nextInt(1..30)
-        _refresh.value = UiState.Loading
-        _listUiState.value = UiState.Uninitialized
-        _listUiState.value = UiState.Loading
-        _refresh.value = UiState.Success(true)
-    }*/
-
-    companion object {
-        const val DEFAULT_PAGE_SIZE = 20
+    fun refreshDigimonList() {
+        _refresh.update { UiState.Loading }
+        _refresh.update { UiState.Success(true) }
     }
 
 }

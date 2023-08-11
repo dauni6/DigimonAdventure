@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dontsu.domain.model.Content
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ItemMainDigimonBinding
-import com.dontsu.presentation.extensions.loadWithName
+import com.dontsu.presentation.extension.loadWithName
 
 class DigimonListPagingDataAdapter(
     private val itemClicked: (Content?) -> Unit

@@ -6,8 +6,8 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dontsu.presentation.databinding.ItemListLoadingStateBinding
-import com.dontsu.presentation.extensions.setOnSingleClickListener
-import com.dontsu.presentation.extensions.toVisible
+import com.dontsu.presentation.extension.setOnSingleClickListener
+import com.dontsu.presentation.extension.toVisible
 
 class DigimonLoadingStateAdapter(private val retry: () -> Unit) : LoadStateAdapter<DigimonLoadingStateAdapter.DigimonLoadingStateViewHolder>() {
 

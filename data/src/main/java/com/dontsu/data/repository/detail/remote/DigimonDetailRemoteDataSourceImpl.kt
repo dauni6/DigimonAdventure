@@ -1,8 +1,8 @@
 package com.dontsu.data.repository.detail.remote
 
 import androidx.annotation.WorkerThread
-import com.dontsu.data.exceptions.EmptyBodyException
-import com.dontsu.data.exceptions.NetworkFailureException
+import com.dontsu.data.exception.EmptyBodyException
+import com.dontsu.data.exception.NetworkFailureException
 import com.dontsu.data.mapper.toDigimon
 import com.dontsu.data.model.response.DigimonResponse
 import com.dontsu.data.network.DigimonApi

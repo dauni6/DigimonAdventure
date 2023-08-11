@@ -1,4 +1,4 @@
-package com.dontsu.data.exceptions
+package com.dontsu.data.exception
 
 class EmptyLocalDataException(message: String? = ""): Exception(message)
 

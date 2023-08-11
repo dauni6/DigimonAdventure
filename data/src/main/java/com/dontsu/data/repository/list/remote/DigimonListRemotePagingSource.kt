@@ -1,16 +1,15 @@
 package com.dontsu.data.repository.list.remote
 
+import androidx.annotation.WorkerThread
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dontsu.data.exceptions.EmptyBodyException
+import com.dontsu.data.exception.EmptyBodyException
 import com.dontsu.data.mapper.toDigimonList
 import com.dontsu.data.model.response.DigimonListResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.Content
-import com.dontsu.domain.model.DigimonList
-import com.dontsu.domain.model.UiState
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -23,9 +22,10 @@ class DigimonListRemotePagingSource @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : PagingSource<Int, Content>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> {
+    @WorkerThread
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> = withContext(ioDispatcher) {
         val page = params.key ?: START_PAGE
-        return try {
+        return@withContext try {
             val response = api.getDigimonList(page = page, pageSize = params.loadSize)
             if (response.isSuccessful) {
                 val digimonResponse: DigimonListResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
