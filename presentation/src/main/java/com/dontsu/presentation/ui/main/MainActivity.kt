@@ -3,6 +3,7 @@ package com.dontsu.presentation.ui.main
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.dontsu.presentation.ui.base.BaseActivity
 import com.dontsu.presentation.ui.detail.DetailActivity
 import com.dontsu.domain.model.UiState
@@ -14,6 +15,7 @@ import com.dontsu.presentation.ui.search.SearchActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -94,6 +96,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(ActivityMa
             viewModel.refreshDigimonList()
             digimonListPagingDataAdapter.refresh()
         }
+
+        fabMainList.setOnClickListener {
+            lifecycleScope.launch {
+                recyclerView.quickScrollToTop()
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
