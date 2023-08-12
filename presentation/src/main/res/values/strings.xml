@@ -15,4 +15,5 @@
     <string name="retry">Retry</string>
     <string name="please_retry_again">Please retry again.</string>
     <string name="not_founded">not founded.</string>
+    <string name="scroll_up">Scroll up</string>
 </resources>
