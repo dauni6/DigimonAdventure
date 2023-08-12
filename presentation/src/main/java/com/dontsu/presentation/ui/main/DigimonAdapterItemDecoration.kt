@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dontsu.presentation.extensions.dpToPx
+import com.dontsu.presentation.extension.dpToPx
 
 
 class DigimonAdapterItemDecoration : RecyclerView.ItemDecoration() {

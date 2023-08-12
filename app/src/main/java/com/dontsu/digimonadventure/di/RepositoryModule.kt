@@ -1,5 +1,6 @@
 package com.dontsu.digimonadventure.di
 
+import com.dontsu.data.network.DigimonApi
 import com.dontsu.data.repository.detail.DigimonDetailRepositoryImpl
 import com.dontsu.data.repository.list.DigimonListRepositoryImpl
 import com.dontsu.data.repository.search.DigimonSearchRepositoryImpl
@@ -7,8 +8,6 @@ import com.dontsu.domain.repository.detail.DigimonDetailRepository
 import com.dontsu.domain.repository.detail.local.DigimonDetailLocalDataSource
 import com.dontsu.domain.repository.detail.remote.DigimonDetailRemoteDataSource
 import com.dontsu.domain.repository.list.DigimonListRepository
-import com.dontsu.domain.repository.list.local.DigimonListLocalDataSource
-import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
 import com.dontsu.domain.repository.search.DigimonSearchRepository
 import com.dontsu.domain.repository.search.local.DigimonSearchLocalDataSource
 import com.dontsu.domain.repository.search.remote.DigimonSearchRemoteDataSource
@@ -24,14 +23,13 @@ import javax.inject.Singleton
 object RepositoryModule {
 
     @Provides
-    @Singleton
     fun provideDigimonListRepository(
-        remoteDataSource: DigimonListRemoteDataSource,
-        localDataSource: DigimonListLocalDataSource
+        api: DigimonApi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonListRepository {
         return DigimonListRepositoryImpl(
-            remoteDataSource = remoteDataSource,
-            localDataSource = localDataSource
+            api = api,
+            ioDispatcher = ioDispatcher
         )
     }
 

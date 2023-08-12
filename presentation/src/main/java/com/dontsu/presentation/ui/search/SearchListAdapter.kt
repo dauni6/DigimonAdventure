@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dontsu.presentation.extensions.loadWithName
+import com.dontsu.presentation.extension.loadWithName
 import com.dontsu.domain.model.Content
 import com.dontsu.presentation.databinding.ItemMainDigimonBinding
 

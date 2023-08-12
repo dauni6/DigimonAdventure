@@ -1,4 +1,4 @@
-package com.dontsu.presentation.extensions
+package com.dontsu.presentation.extension
 
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar

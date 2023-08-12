@@ -2,16 +2,17 @@ package com.dontsu.presentation.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dontsu.presentation.extension.loadWithName
 import com.dontsu.domain.model.Content
+import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ItemMainDigimonBinding
+import com.dontsu.presentation.extension.loadWithName
 
-class DigimonListAdapter(
-    private val itemClicked: (Content) -> Unit
-): ListAdapter<Content, DigimonListAdapter.DigimonContentViewHolder>(diffCallback) {
+class DigimonListPagingDataAdapter(
+    private val itemClicked: (Content?) -> Unit
+) : PagingDataAdapter<Content, DigimonListPagingDataAdapter.DigimonContentViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DigimonContentViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,16 +26,15 @@ class DigimonListAdapter(
     }
 
     override fun onBindViewHolder(holder: DigimonContentViewHolder, position: Int) {
-        holder.bind(getItem(position))
+       holder.bind(getItem(position))
     }
 
-    class DigimonContentViewHolder(
-        private val binding: ItemMainDigimonBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+    class DigimonContentViewHolder(private val binding: ItemMainDigimonBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(content: Content) = with(binding) {
+        fun bind(content: Content?) = with(binding) {
+            if (content == null) return@with
             digimonImageView.loadWithName(content.name)
-            digimonNameTextView.text = content.name ?: "not found"
+            digimonNameTextView.text = content.name ?: itemView.context.getString(R.string.not_founded)
         }
     }
 
@@ -43,12 +43,12 @@ class DigimonListAdapter(
 
             // compare unique value
             override fun areItemsTheSame(oldItem: Content, newItem: Content): Boolean {
-               return oldItem.id == newItem.id
+                return oldItem.id == newItem.id
             }
 
             // compare item itself.
             override fun areContentsTheSame(oldItem: Content, newItem: Content): Boolean {
-               return oldItem == newItem
+                return oldItem == newItem
             }
 
         }

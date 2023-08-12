@@ -15,7 +15,7 @@ import com.dontsu.domain.model.UiState
 import com.dontsu.domain.model.successOrNull
 import com.dontsu.presentation.R
 import com.dontsu.presentation.databinding.ActivityDetailBinding
-import com.dontsu.presentation.extensions.*
+import com.dontsu.presentation.extension.*
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi

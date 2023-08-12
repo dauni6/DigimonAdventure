@@ -1,4 +1,4 @@
-package com.dontsu.presentation.extensions
+package com.dontsu.presentation.extension
 
 import android.widget.ImageView
 import androidx.annotation.DrawableRes

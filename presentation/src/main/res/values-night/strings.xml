@@ -12,4 +12,6 @@
     <string name="no_available_fields">No available fields.</string>
     <string name="no_search_results_found">No search results found.</string>
     <string name="check_network_connectivity">Please check your network connectivity status.</string>
+    <string name="retry">Retry</string>
+    <string name="please_retry_again">Please retry again.</string>
 </resources>

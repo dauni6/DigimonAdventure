@@ -1,8 +1,8 @@
 package com.dontsu.digimonadventure.di
 
 import com.dontsu.domain.usecase.detail.*
-import com.dontsu.domain.usecase.list.GetDigimonListUseCase
-import com.dontsu.domain.usecase.list.GetDigimonListUseCaseImpl
+import com.dontsu.domain.usecase.list.GetDigimonPagingListUseCase
+import com.dontsu.domain.usecase.list.GetDigimonPagingListUseCaseImpl
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCase
 import com.dontsu.domain.usecase.search.GetDigimonSearchUseCaseImpl
 import dagger.Binds
@@ -17,9 +17,9 @@ abstract class UseCaseModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindGetDigimonListUseCase(
-        getDigimonListUseCaseImpl: GetDigimonListUseCaseImpl
-    ): GetDigimonListUseCase
+    abstract fun bindGetDigimonPagingListUseCase(
+        getDigimonPagingListUseCaseImpl: GetDigimonPagingListUseCaseImpl
+    ): GetDigimonPagingListUseCase
 
     @Binds
     @ViewModelScoped
@@ -47,7 +47,7 @@ abstract class UseCaseModule {
 
     @Binds
     @ViewModelScoped
-    abstract fun bindDeleteDigimonDeailFavoriteUseCase(
+    abstract fun bindDeleteDigimonDetailFavoriteUseCase(
         deleteDigimonDetailFavoriteUseCaseImpl: DeleteDigimonDetailFavoriteUseCaseImpl
     ): DeleteDigimonDetailFavoriteUseCase
 

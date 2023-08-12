@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:paddingVertical="@dimen/padding04">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btnLoadingRetry"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/shape_rectangle_rounded_8dp"
+        android:gravity="center"
+        android:text="@string/retry"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Theme.DigimonAdventure.TextViewMedium"
+        android:id="@+id/tvLoadingRetryNotice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin08"
+        android:text="@string/please_retry_again"/>
+
+    <ProgressBar
+        android:id="@+id/pbLoadingRetry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/white"
+        android:layout_marginTop="@dimen/margin08"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>

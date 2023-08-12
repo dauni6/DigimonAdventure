@@ -1,25 +1,35 @@
 package com.dontsu.data.repository.list
 
-import com.dontsu.domain.model.DigimonList
-import com.dontsu.domain.model.UiState
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.dontsu.data.network.DigimonApi
+import com.dontsu.data.repository.list.remote.DigimonListRemotePagingSource
+import com.dontsu.domain.model.Content
 import com.dontsu.domain.repository.list.DigimonListRepository
-import com.dontsu.domain.repository.list.local.DigimonListLocalDataSource
-import com.dontsu.domain.repository.list.remote.DigimonListRemoteDataSource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DigimonListRepositoryImpl @Inject constructor(
-    private val remoteDataSource: DigimonListRemoteDataSource,
-    private val localDataSource: DigimonListLocalDataSource
+    private val api: DigimonApi,
+    private val ioDispatcher: CoroutineDispatcher
 ): DigimonListRepository {
 
-    override fun getDigimonList(pageSize: Int): Flow<UiState<DigimonList>> {
-        // todo : check local data before fetching remote data.
-//        val digimonListFromDB = localDataSource.getDigimonList()
-//        if (digimonListFromDB.isNotEmpty) {
-//            return digimonListFromDB
-//        }
-        return remoteDataSource.getDigimonList(pageSize = pageSize)
+    override fun getDigimonPagingData(): Flow<PagingData<Content>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = DEFAULT_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                DigimonListRemotePagingSource(api = api, ioDispatcher = ioDispatcher)
+            }
+        ).flow
+    }
+
+    companion object {
+        const val DEFAULT_PAGE_SIZE = 20
     }
 
 }

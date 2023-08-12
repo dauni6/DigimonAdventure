@@ -30,4 +30,31 @@
     <dimen name="text40">40sp</dimen>
     <dimen name="text42">42sp</dimen>
 
+    <!-- Radius -->
+    <dimen name="radius06">6dp</dimen>
+    <dimen name="radius08">8dp</dimen>
+    <dimen name="radius10">10dp</dimen>
+    <dimen name="radius12">12dp</dimen>
+    <dimen name="radius14">14dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin08">8dp</dimen>
+    <dimen name="margin10">10dp</dimen>
+    <dimen name="margin12">12dp</dimen>
+    <dimen name="margin14">14dp</dimen>
+    <dimen name="margin16">16dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding04">4dp</dimen>
+    <dimen name="padding06">6dp</dimen>
+    <dimen name="padding08">8dp</dimen>
+    <dimen name="padding10">10dp</dimen>
+    <dimen name="padding12">12dp</dimen>
+    <dimen name="padding14">14dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation02">2dp</dimen>
+    <dimen name="elevation04">4dp</dimen>
+    <dimen name="elevation06">6dp</dimen>
+
 </resources>

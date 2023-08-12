@@ -62,6 +62,9 @@ dependencies {
 
     implementation(Dependencies.Serialization.kotlinx_serialization_json)
 
+    // Paging3
+    implementation(Dependencies.Paging3.paging3)
+
     // Logging
     implementation(Dependencies.Logging.timber)
 
