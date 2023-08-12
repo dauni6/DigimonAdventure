@@ -57,7 +57,8 @@
         app:borderWidth="0dp"
         app:layout_anchor="@id/swiperefresh"
         app:layout_anchorGravity="bottom|end"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:srcCompat="@drawable/ic_arrow_up" />
 
     <ProgressBar
         android:id="@+id/progressBar"
