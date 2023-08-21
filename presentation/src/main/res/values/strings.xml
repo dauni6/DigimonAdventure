@@ -16,4 +16,8 @@
     <string name="please_retry_again">Please retry again.</string>
     <string name="not_founded">not founded.</string>
     <string name="scroll_up">Scroll up</string>
+    <string name="unknown">Unknown</string>
+    <string name="digicode">Digicode : %s</string>
+    <string name="no_description">There is no description for this Digimon.</string>
+    <string name="no_value_of_id">There is no value of the digimon id.</string>
 </resources>
