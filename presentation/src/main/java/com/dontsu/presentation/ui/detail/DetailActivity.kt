@@ -1,6 +1,5 @@
 package com.dontsu.presentation.ui.detail
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.widget.LinearLayout
@@ -113,29 +112,29 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(Acti
         // do something...
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setDigimon(digimon: Digimon) = with(binding) {
         digimonImageView.loadWithUrl(digimon.image?.first()?.href)
-        digimonIdTextView.text = "Digicode : ${digimon.id.toString().ifEmpty { DIGIMON_UNKNOWN }}"
-        collapsingToolbarLayout.title = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
-        digimonNameTextView.text = digimon.name.toString().ifEmpty { DIGIMON_UNKNOWN }
+        val unknownString = getString(R.string.unknown)
+        digimonIdTextView.text = getString(R.string.digicode, digimon.id.toString().ifEmpty { unknownString })
+        collapsingToolbarLayout.title = digimon.name.toString().ifEmpty { unknownString }
+        digimonNameTextView.text = digimon.name.toString().ifEmpty { unknownString }
         digimon.level?.let {
             levelValueTextView.text = if(it.isEmpty()) {
-                DIGIMON_UNKNOWN
+                unknownString
             } else {
                 it.first()?.level.toString()
             }
         }
         digimon.attribute?.let {
             attributeValueTextView.text = if (it.isEmpty()) {
-                DIGIMON_UNKNOWN
+                unknownString
             } else {
                 it.first()?.attribute.toString()
             }
         }
         digimon.type?.let {
             typeValueTextview.text = if (it.isEmpty()) {
-                DIGIMON_UNKNOWN
+                unknownString
             } else {
                 it.first()?.type.toString()
             }
@@ -168,7 +167,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(Acti
                 description?.language == "en_us"
             }
             descriptionTextView.text = if (description == null) {
-                DIGIMON_NO_DESCRIPTION
+                getString(R.string.no_description)
             } else {
                 description.description
             }
@@ -178,8 +177,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>(Acti
     companion object {
 
         const val DIGIMON_ID_KEY = "DIGIMON_ID_KEY"
-        const val DIGIMON_UNKNOWN = "Unknown"
-        const val DIGIMON_NO_DESCRIPTION = "There is no description for this Digimon."
 
         fun newInstance(context: Context, id: Int?): Intent {
             return Intent(context, DetailActivity::class.java).apply {
