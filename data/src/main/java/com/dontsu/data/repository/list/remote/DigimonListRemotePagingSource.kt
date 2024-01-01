@@ -3,13 +3,10 @@ package com.dontsu.data.repository.list.remote
 import androidx.annotation.WorkerThread
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.dontsu.data.exception.EmptyBodyException
+import com.dontsu.data.exception.EmptyResponseBodyException
 import com.dontsu.data.mapper.toDigimonList
-import com.dontsu.data.model.response.DigimonListResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.Content
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -19,29 +16,23 @@ private const val START_PAGE = 0
 
 class DigimonListRemotePagingSource @Inject constructor(
     private val api: DigimonApi,
-    private val ioDispatcher: CoroutineDispatcher
 ) : PagingSource<Int, Content>() {
 
     @WorkerThread
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> = withContext(ioDispatcher) {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Content> {
         val page = params.key ?: START_PAGE
-        return@withContext try {
-            val response = api.getDigimonList(page = page, pageSize = params.loadSize)
-            if (response.isSuccessful) {
-                val digimonResponse: DigimonListResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-                val digimonList = digimonResponse.toDigimonList()
-                digimonList.content?.let { list ->
-                    val contents = list.filterNotNull()
-                    LoadResult.Page(
-                        data = contents,
-                        prevKey = if (page == START_PAGE) null else page - 1,
-                        nextKey = if (list.isEmpty()) null else page + 1
-                    )
-                } ?: kotlin.run {
-                    throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-                }
-            } else {
-                throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
+        return try {
+            val response = api.getDigimonList(page = page, pageSize = params.loadSize).getOrThrow()
+            val digimonList = response.toDigimonList()
+            digimonList.content?.let { list ->
+                val contents = list.filterNotNull()
+                LoadResult.Page(
+                    data = contents,
+                    prevKey = if (page == START_PAGE) null else page - 1,
+                    nextKey = if (list.isEmpty()) null else page + 1
+                )
+            } ?: kotlin.run {
+                throw EmptyResponseBodyException()
             }
         } catch (e: IOException) {
             LoadResult.Error(e)

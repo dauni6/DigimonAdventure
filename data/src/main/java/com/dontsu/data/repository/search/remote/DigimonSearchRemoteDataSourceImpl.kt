@@ -1,10 +1,7 @@
 package com.dontsu.data.repository.search.remote
 
 import androidx.annotation.WorkerThread
-import com.dontsu.data.exception.EmptyBodyException
-import com.dontsu.data.exception.NetworkFailureException
 import com.dontsu.data.mapper.toDigimonList
-import com.dontsu.data.model.response.DigimonListResponse
 import com.dontsu.data.network.DigimonApi
 import com.dontsu.domain.model.DigimonList
 import com.dontsu.domain.model.UiState
@@ -26,13 +23,8 @@ class DigimonSearchRemoteDataSourceImpl @Inject constructor(
 
     @WorkerThread
     override fun searchDigimon(name: String): Flow<UiState<DigimonList>> = flow<UiState<DigimonList>> {
-        val response = api.searchDigimon(name = name)
-        if (response.isSuccessful) {
-            val digimons: DigimonListResponse = response.body() ?: throw EmptyBodyException("[error code : ${response.code()}] -> ${response.raw()}")
-            emit(UiState.Success(digimons.toDigimonList()))
-        } else {
-            throw NetworkFailureException("[${response.code()}] - ${response.raw()}")
-        }
+        val response = api.searchDigimon(name = name).getOrThrow()
+        emit(UiState.Success(response.toDigimonList()))
     }
     // flowOn affects the upstreeam flow ↑. So, the flow builder above is going to run in the `io` dispatcher.
     .flowOn(ioDispatcher)

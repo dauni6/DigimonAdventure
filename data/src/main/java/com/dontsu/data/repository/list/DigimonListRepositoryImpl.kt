@@ -7,13 +7,11 @@ import com.dontsu.data.network.DigimonApi
 import com.dontsu.data.repository.list.remote.DigimonListRemotePagingSource
 import com.dontsu.domain.model.Content
 import com.dontsu.domain.repository.list.DigimonListRepository
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class DigimonListRepositoryImpl @Inject constructor(
     private val api: DigimonApi,
-    private val ioDispatcher: CoroutineDispatcher
 ): DigimonListRepository {
 
     override fun getDigimonPagingData(): Flow<PagingData<Content>> {
@@ -23,7 +21,7 @@ class DigimonListRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                DigimonListRemotePagingSource(api = api, ioDispatcher = ioDispatcher)
+                DigimonListRemotePagingSource(api = api)
             }
         ).flow
     }

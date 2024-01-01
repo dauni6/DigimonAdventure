@@ -36,8 +36,8 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             flow {
                 emit(getDetailUseCase.invoke(id = digimonId))
-            }.stateIn(this).collectLatest {
-                _uiState.value = it
+            }.stateIn(this).collectLatest { digimon ->
+                _uiState.update { UiState.Success(digimon) }
             }
         }
     }

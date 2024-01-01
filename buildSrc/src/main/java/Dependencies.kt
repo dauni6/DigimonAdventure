@@ -45,6 +45,7 @@ object Dependencies {
         // Retrofit
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val retrofit_serialization_converter = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofit_serialization_converter}"
+        const val retrofit_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.retrofit_logging_interceptor}"
     }
 
     object Glide {

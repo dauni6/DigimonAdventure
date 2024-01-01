@@ -30,22 +30,18 @@ object RemoteDataSourceModule {
     @Singleton
     fun provideDigimonDetailRemoteDataSource(
         digimonApi: DigimonApi,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonDetailRemoteDataSource {
         return DigimonDetailRemoteDataSourceImpl(
             api = digimonApi,
-            ioDispatcher = ioDispatcher
         )
     }
 
     @Provides
     fun provideDigimonListRemotePagingSource(
         digimonApi: DigimonApi,
-        @IoDispatcher ioDispatcher: CoroutineDispatcher
     ): DigimonListRemotePagingSource {
         return DigimonListRemotePagingSource(
             api = digimonApi,
-            ioDispatcher = ioDispatcher
         )
     }
 

@@ -1,6 +1,15 @@
 package com.dontsu.data.mapper
 
-import com.dontsu.data.model.entity.*
+import com.dontsu.data.model.entity.AttributeEntity
+import com.dontsu.data.model.entity.DescriptionEntity
+import com.dontsu.data.model.entity.DigimonEntity
+import com.dontsu.data.model.entity.FieldEntity
+import com.dontsu.data.model.entity.ImageEntity
+import com.dontsu.data.model.entity.LevelEntity
+import com.dontsu.data.model.entity.NextEvolutionEntity
+import com.dontsu.data.model.entity.PriorEvolutionEntity
+import com.dontsu.data.model.entity.SkillEntity
+import com.dontsu.data.model.entity.TypeEntity
 import com.dontsu.data.model.response.DigimonResponse
 import com.dontsu.domain.model.Digimon
 

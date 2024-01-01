@@ -13,6 +13,7 @@ object Versions {
     const val glide = "4.12.0"
     const val retrofit = "2.9.0"
     const val retrofit_serialization_converter = "1.0.0"
+    const val retrofit_logging_interceptor = "4.11.0"
     const val timber = "5.0.1"
     const val swiperefreshlayout = "1.1.0"
     const val javax_inject = "1"

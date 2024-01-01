@@ -2,7 +2,15 @@ package com.dontsu.data.db
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.dontsu.data.model.entity.*
+import com.dontsu.data.model.entity.AttributeEntity
+import com.dontsu.data.model.entity.DescriptionEntity
+import com.dontsu.data.model.entity.FieldEntity
+import com.dontsu.data.model.entity.ImageEntity
+import com.dontsu.data.model.entity.LevelEntity
+import com.dontsu.data.model.entity.NextEvolutionEntity
+import com.dontsu.data.model.entity.PriorEvolutionEntity
+import com.dontsu.data.model.entity.SkillEntity
+import com.dontsu.data.model.entity.TypeEntity
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

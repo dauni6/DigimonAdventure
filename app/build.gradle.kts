@@ -59,6 +59,7 @@ dependencies {
     // Retrofit
     implementation(Dependencies.Network.retrofit)
     implementation(Dependencies.Network.retrofit_serialization_converter)
+    implementation(Dependencies.Network.retrofit_logging_interceptor)
 
     implementation(Dependencies.Serialization.kotlinx_serialization_json)
 

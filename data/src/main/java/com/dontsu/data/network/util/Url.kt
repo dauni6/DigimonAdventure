@@ -1,4 +1,4 @@
-package com.dontsu.data.util
+package com.dontsu.data.network.util
 
 object Url {
 

@@ -4,7 +4,6 @@ import androidx.room.*
 import com.dontsu.data.model.entity.ContentEntity
 import com.dontsu.data.model.entity.DigimonEntity
 import com.dontsu.data.model.entity.FavoriteEntity
-import com.dontsu.domain.model.Favorite
 import kotlinx.coroutines.flow.Flow
 
 @Dao

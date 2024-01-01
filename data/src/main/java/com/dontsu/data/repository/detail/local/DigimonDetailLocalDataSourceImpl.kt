@@ -25,17 +25,9 @@ class DigimonDetailLocalDataSourceImpl @Inject constructor(
 ): DigimonDetailLocalDataSource {
 
     @WorkerThread
-    override suspend fun getDigimon(id: Int): UiState<Digimon> {
-        return try {
-            val digimon = dao.getDigimon(id = id)
-            if (digimon == null) {
-                throw EmptyLocalDataException("There is no digimon for this id.")
-            } else {
-                UiState.Success(digimon.toDigimon())
-            }
-        } catch (e: Exception) {
-            UiState.Error(e)
-        }
+    override suspend fun getDigimon(id: Int): Digimon {
+        val digimon = dao.getDigimon(id = id)
+        return digimon?.toDigimon() ?: throw EmptyLocalDataException("There is no digimon for this id.")
     }
 
     @WorkerThread
